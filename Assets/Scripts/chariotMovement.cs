@@ -36,6 +36,7 @@ public class chariotMovement : MonoBehaviour {
 			transform.Rotate (-.2f, 0, 0);
 			yield return new WaitForSeconds (.02f);
 		}
+		//soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
 		StartCoroutine (rotateCam ());
 	}
 
@@ -44,6 +45,10 @@ public class chariotMovement : MonoBehaviour {
 		if (col.gameObject.name == "otherChariot" || col.gameObject.name == "circus") {
 			col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
 			Debug.Log("test");
+
+		}
+		if (col.gameObject.tag == "circus") {
+			currentSpeed /= 2;
 
 		}
 	}
@@ -61,10 +66,10 @@ public class chariotMovement : MonoBehaviour {
 			desiredSpeed = movementSpeed;
 		} else if (Input.GetKey (KeyCode.A)) {
 			dirVector = -transform.right; 
-			desiredSpeed = movementSpeed;
+			desiredSpeed = movementSpeed * .5f;
 		} else if (Input.GetKey (KeyCode.D)) {
 			dirVector = transform.right; 
-			desiredSpeed = movementSpeed;
+			desiredSpeed = movementSpeed * .5f;
 		} else {
 			desiredSpeed = 0;
 		}
