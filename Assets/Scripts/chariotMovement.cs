@@ -13,19 +13,38 @@ public class chariotMovement : MonoBehaviour {
 	GameObject camera;
 	void Start () {
 		camera = transform.GetChild(0).transform.gameObject;
+		StartCoroutine (rotateCam ());
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		checkInput ();
+		if (Input.GetKey (KeyCode.Space)) {
+			Cursor.visible = !Cursor.visible;
+		}
 	}
-
+	IEnumerator rotateCam(){
+		float speed = currentSpeed;
+		for(int i = 0; i < 20 - speed; i++){
+			transform.Rotate (.2f, 0, 0);
+			Debug.Log ("current speed:" + currentSpeed);
+			yield return new WaitForSeconds (.02f);
+			}
+		yield return new WaitForSeconds (.02f);
+		for(int i = 0; i < 20 - speed; i++){
+			Debug.Log ("current speed:" + currentSpeed);
+			transform.Rotate (-.2f, 0, 0);
+			yield return new WaitForSeconds (.02f);
+		}
+		StartCoroutine (rotateCam ());
+	}
 
 
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.name == "otherChariot" || col.gameObject.name == "circus") {
 			col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
 			Debug.Log("test");
+
 		}
 	}
 
