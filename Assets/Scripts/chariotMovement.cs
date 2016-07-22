@@ -14,6 +14,7 @@ public class chariotMovement : MonoBehaviour {
 	void Start () {
 		camera = transform.GetChild(0).transform.gameObject;
 		StartCoroutine (rotateCam ());
+		soundManager.instance.playBgm (soundManager.instance.bgm);
 	}
 	
 	// Update is called once per frame
@@ -22,18 +23,20 @@ public class chariotMovement : MonoBehaviour {
 		if (Input.GetKey (KeyCode.Space)) {
 			Cursor.visible = !Cursor.visible;
 		}
+
+
 	}
 	IEnumerator rotateCam(){
 		float speed = currentSpeed;
-		for(int i = 0; i < 20 - speed; i++){
-			transform.Rotate (.2f, 0, 0);
-			Debug.Log ("current speed:" + currentSpeed);
+		for(int i = 0; i < 12 - speed; i++){
+			transform.Rotate (0.2f, 0, 0);
+			//Debug.Log ("current speed:" + currentSpeed);
 			yield return new WaitForSeconds (.02f);
 			}
 		yield return new WaitForSeconds (.02f);
-		for(int i = 0; i < 20 - speed; i++){
-			Debug.Log ("current speed:" + currentSpeed);
-			transform.Rotate (-.2f, 0, 0);
+		for(int i = 0; i < 12 - speed; i++){
+			//Debug.Log ("current speed:" + currentSpeed);
+			transform.Rotate (-0.2f, 0, 0);
 			yield return new WaitForSeconds (.02f);
 		}
 		//soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
@@ -83,7 +86,13 @@ public class chariotMovement : MonoBehaviour {
  		transform.position += dirVector * Time.deltaTime * currentSpeed;
 
 	}
-
+	void OnTriggerExit(Collider col){
+		if (col.gameObject.tag == "tracker") {
+			lapTracker lap = GameObject.FindWithTag ("tracker").GetComponent<lapTracker> ();
+			lap.currentLaps++;
+			print ("you have completed " + lap.currentLaps + " laps");
+		}
+	}
 
 
 }
