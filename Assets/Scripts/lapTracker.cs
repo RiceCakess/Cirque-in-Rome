@@ -17,19 +17,19 @@ public class lapTracker : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (currentLaps == 8 && fir == false) {
+		if (currentLaps == 6 && fir == false) {
 			print ("first lap done");
 			GameObject.FindWithTag ("tracker").GetComponent<Animation> ().Play ("First");
 			fir = true;
-		} else if (currentLaps == 12 && sec == false) {
+		} else if (currentLaps == 9 && sec == false) {
 			print ("second lap done");
 			GameObject.FindWithTag ("tracker").GetComponent<Animation> ().Play ("Second");
 			sec = true;
-		} else if (currentLaps == 16 && thir == false) {
+		} else if (currentLaps == 12 && thir == false) {
 			print ("third lap done");
 			GameObject.FindWithTag ("tracker").GetComponent<Animation> ().Play ("Third");
 			thir = true;
-		} else if (currentLaps == 20 && four == false) {
+		} else if (currentLaps == 15 && four == false) {
 			print ("fourth lap done");
 			GameObject.FindWithTag ("tracker").GetComponent<Animation> ().Play ("Fourth");
 			four = true;
