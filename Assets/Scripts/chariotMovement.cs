@@ -62,7 +62,7 @@ public class chariotMovement : MonoBehaviour {
 			GameObject healthImage = GameObject.FindWithTag ("health");
 			Image heal = healthImage.GetComponent<Image> ();
 			heal.GetComponent<healthBar> ().hit ();
-			health -= 10;
+			health -= 1;
 
 		}
 		if (col.gameObject.tag == "circus") {

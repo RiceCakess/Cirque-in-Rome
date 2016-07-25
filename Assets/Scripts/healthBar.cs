@@ -18,6 +18,6 @@ public class healthBar : MonoBehaviour {
 		bar.fillAmount -= 1f/20f;
 	}
 	public void hit(){
-		bar.fillAmount -= .1f;
+		bar.fillAmount -= .01f;
 	}
 }
