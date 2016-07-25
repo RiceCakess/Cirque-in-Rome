@@ -6,7 +6,7 @@ public class chariotMovement : MonoBehaviour {
 	public float movementSpeed = 10f;
 	public float stamina = 20f;
 	public float health = 100;
-	float speed = 100.0f;
+	public float speed = 100.0f;
 	float desiredSpeed = 0;
 	float currentSpeed = 0;
 	float accel = .02f;
@@ -104,6 +104,7 @@ public class chariotMovement : MonoBehaviour {
 		}
 
  		transform.position += dirVector * Time.deltaTime * currentSpeed;
+		transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
 
 	}
 	void OnTriggerExit(Collider col){

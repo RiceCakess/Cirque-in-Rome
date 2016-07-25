@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class healthBar : MonoBehaviour {
 	Image bar;
+	public Image redFlash;
+	public Sprite no;
+	public Sprite red;
 	// Use this for initialization
 	void Start () {
 		bar = GetComponent<Image> ();
@@ -20,4 +23,12 @@ public class healthBar : MonoBehaviour {
 	public void hit(){
 		bar.fillAmount -= .01f;
 	}
+
+	IEnumerator flashRed(){
+		redFlash.sprite = red;
+		yield return new WaitForSeconds (.1f);
+		redFlash.sprite = no;
+
+	}
+
 }
