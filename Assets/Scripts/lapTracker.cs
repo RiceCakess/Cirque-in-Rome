@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class lapTracker : MonoBehaviour {
 	//IDK why but each lap = 3 laps so just go with it 
@@ -34,6 +35,8 @@ public class lapTracker : MonoBehaviour {
 			GameObject.FindWithTag ("tracker").GetComponent<Animation> ().Play ("Fourth");
 			four = true;
 			print ("you wooooon kinda");
+			SceneManager.LoadScene (3);
+
 		}
 
 

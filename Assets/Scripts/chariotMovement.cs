@@ -56,7 +56,7 @@ public class chariotMovement : MonoBehaviour {
 
 
 	void OnCollisionEnter(Collision col){
-		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus") {
+		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
 			col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
 			Debug.Log("test");
 			GameObject healthImage = GameObject.FindWithTag ("health");
