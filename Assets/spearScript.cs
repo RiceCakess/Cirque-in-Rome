@@ -12,4 +12,12 @@ public class spearScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void throwSpear(){
+		transform.parent = null;
+
+
+	}
+
+
 }

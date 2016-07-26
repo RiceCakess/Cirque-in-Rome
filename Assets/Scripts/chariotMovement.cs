@@ -19,6 +19,7 @@ public class chariotMovement : MonoBehaviour {
 		camera = transform.GetChild(0).transform.gameObject;
 		StartCoroutine (rotateCam ());
 		soundManager.instance.playBgm (soundManager.instance.bgm);
+		soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
 	}
 	IEnumerator rotateWheels(){
 		GetComponent<Animation> ().Play ("rotate");
@@ -101,9 +102,7 @@ public class chariotMovement : MonoBehaviour {
 		if (Input.GetKey (KeyCode.E)) {
 			print ("spear key pressed");
 			GameObject spear = GameObject.FindWithTag ("spear");
-			print ("spear found");
-			spear.GetComponent<Rigidbody> ().useGravity = true;
-			spear.GetComponent<Rigidbody> ().AddForce (new Vector3 (10, 50, 0));
+			spear.GetComponent<spearScript> ().throwSpear ();
 
 		}
 
@@ -115,7 +114,7 @@ public class chariotMovement : MonoBehaviour {
 		}
 
  		transform.position += dirVector * Time.deltaTime * currentSpeed;
-		transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
+		transform.position = new Vector3 (transform.position.x, 0.4f, transform.position.z);
 
 	}
 	void OnTriggerExit(Collider col){

@@ -54,6 +54,8 @@ public class AIController : MonoBehaviour {
 		}
 
 		transform.position += dirVector * Time.deltaTime * currentSpeed;
+		//amanda's attempt at a fix
+		transform.position = new Vector3 (transform.position.x, .7f, transform.position.z);
 		currentInput.Clear ();
 		rotation = 0;
 	}
