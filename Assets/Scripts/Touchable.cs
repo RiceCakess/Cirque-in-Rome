@@ -1,5 +1,5 @@
 ﻿// Touchable component
-
+	#if UNITY_EDITOR
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
@@ -24,3 +24,4 @@ public class Touchable_Editor : Editor
 		// Do nothing
 	}
 }
+#endif 

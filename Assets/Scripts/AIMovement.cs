@@ -3,15 +3,18 @@ using System.Collections;
 
 public class AIMovement : MonoBehaviour {
 	bool canMove = true;
+	bool waitingForStart = true;
 	AIController control;
 	// Use this for initialization
 	void Start () {
+		StartCoroutine (waitForStart ());
 		control = GetComponent<AIController> ();
 		currentInput = codes [(int)(Random.value * 3)];
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
 		waypoint = GameObject.Find ("waypoint1").transform;
 		navMeshAgent.SetDestination(waypoint.position);
 		chariotObjects = GameObject.FindGameObjectsWithTag ("otherChariot");
+
 	}
 	Transform waypoint;
 	KeyCode currentInput;
@@ -24,30 +27,37 @@ public class AIMovement : MonoBehaviour {
 	int time = 0;
 	public bool debug = false;
 	// Update is called once per frame
-	void Update () {
+	IEnumerator waitForStart(){
+		yield return new WaitForSeconds (20);
+		waitingForStart = false;
+	}
 
-		foreach (GameObject g in chariotObjects) {
-			if (getDistance (g.transform, transform) < .01f) {
-				if (Random.value > .5f) {
-					control.sendInput (KeyCode.Q);
-				} else {
-					canMove = false;
+
+
+	void Update () {
+		if (waitingForStart == false) {
+			foreach (GameObject g in chariotObjects) {
+				if (getDistance (g.transform, transform) < .01f) {
+					if (Random.value > .5f) {
+						control.sendInput (KeyCode.Q);
+					} else {
+						canMove = false;
+					}
 				}
 			}
-		}
-		if (canMove)
-			control.sendInput (KeyCode.W);
-		else
-			canMove = true;
-		if (getDistance (waypoint.transform, transform) <= .5f) {
-			index++;
-			if (index > 4)
-				index = 1;
-			waypoint = GameObject.Find ("waypoint"+index).transform;
-			navMeshAgent.SetDestination(waypoint.position += new Vector3(Random.value, 0, Random.value));
-		}
+			if (canMove)
+				control.sendInput (KeyCode.W);
+			else
+				canMove = true;
+			if (getDistance (waypoint.transform, transform) <= .5f) {
+				index++;
+				if (index > 4)
+					index = 1;
+				waypoint = GameObject.Find ("waypoint" + index).transform;
+				navMeshAgent.SetDestination (waypoint.position += new Vector3 (Random.value, 0, Random.value));
+			}
 
-		/*if (lastPosition != null) {
+			/*if (lastPosition != null) {
 			if (getDistance (lastPosition, transform.position) < .009f) {
 				notMoving++;
 			} else if (notMoving > 3) {
@@ -64,6 +74,7 @@ public class AIMovement : MonoBehaviour {
 			notMoving = 0;
 		}
 		time++;*/
+		}
 
 	}
 	void goTo(Transform pos){

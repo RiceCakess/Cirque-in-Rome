@@ -10,6 +10,7 @@ public class lapTracker : MonoBehaviour {
 	public bool sec = false;
 	public bool thir = false;
 	public bool four = false;
+	public bool lapCheat = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -42,15 +43,21 @@ public class lapTracker : MonoBehaviour {
 
 	}
 	void OnTriggerEnter(Collider col){
+		StartCoroutine (delayLaps(col));
 		if (col.gameObject.tag == "chariot") {
 			currentLaps++;
 			print ("you have completed " + currentLaps + " laps");
+			lapCheat = false;
 		}
 
 
 
 
-	}
 
+	}
+	IEnumerator delayLaps(Collider col){
+		yield return new WaitForSeconds (10);
+		lapCheat = true;
+	}
 
 }
