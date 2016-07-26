@@ -33,7 +33,6 @@ public class AIMovement : MonoBehaviour {
 			walking = true;
 		}*/
 
-
 		foreach (GameObject g in chariotObjects) {
 			if (getDistance (g.transform, transform) < .01f) {
 				if (Random.value > .5f) {
