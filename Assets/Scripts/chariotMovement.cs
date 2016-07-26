@@ -97,6 +97,16 @@ public class chariotMovement : MonoBehaviour {
 		} else {
 			desiredSpeed = 0;
 		}
+
+		if (Input.GetKey (KeyCode.E)) {
+			print ("spear key pressed");
+			GameObject spear = GameObject.FindWithTag ("spear");
+			print ("spear found");
+			spear.GetComponent<Rigidbody> ().useGravity = true;
+			spear.GetComponent<Rigidbody> ().AddForce (new Vector3 (10, 50, 0));
+
+		}
+
 		//x	Debug.Log (desiredSpeed + " " + currentSpeed + " " + accel);
 		if (currentSpeed < desiredSpeed) {
 			currentSpeed += accel;
