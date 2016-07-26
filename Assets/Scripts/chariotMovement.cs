@@ -27,12 +27,11 @@ public class chariotMovement : MonoBehaviour {
 		float speed = currentSpeed;
 		for(int i = 0; i < 20 - speed; i++){
 			transform.Rotate (.2f, 0, 0);
-			Debug.Log ("current speed:" + currentSpeed);
 			yield return new WaitForSeconds (.02f);
 			}
 		yield return new WaitForSeconds (.02f);
 		for(int i = 0; i < 20 - speed; i++){
-			Debug.Log ("current speed:" + currentSpeed);
+			//Debug.Log ("current speed:" + currentSpeed);
 			transform.Rotate (-.2f, 0, 0);
 			yield return new WaitForSeconds (.02f);
 		}
@@ -43,9 +42,7 @@ public class chariotMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.name == "otherChariot" || col.gameObject.name == "circus") {
-			col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
-			Debug.Log("test");
-
+			//col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
 		}
 		if (col.gameObject.tag == "circus") {
 			currentSpeed /= 2;
