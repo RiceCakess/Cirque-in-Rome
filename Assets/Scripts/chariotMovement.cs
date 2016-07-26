@@ -62,13 +62,14 @@ public class chariotMovement : MonoBehaviour {
 			GameObject healthImage = GameObject.FindWithTag ("health");
 			Image heal = healthImage.GetComponent<Image> ();
 			heal.GetComponent<healthBar> ().hit ();
+			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
 			health -= 1;
 
 		}
-		if (col.gameObject.tag == "circus") {
-			currentSpeed /= 2;
-
-		}
+//		if (col.gameObject.tag == "circus") {
+//			currentSpeed /= 2;
+//
+//		}
 	}
 
 	void checkInput(){
