@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 public class AIController : MonoBehaviour {
-	public float movementSpeed = 10f;
+	public float movementSpeed = 8f;
 	float speed = 100.0f;
 	float desiredSpeed = 0;
-	float currentSpeed = 0;
+	public float currentSpeed = 0;
 	float accel = .02f;
 	float deccel = .05f;
 	Vector3 dirVector = new Vector3(0,0,0);
