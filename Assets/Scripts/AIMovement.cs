@@ -47,13 +47,14 @@ public class AIMovement : MonoBehaviour {
 		else
 			canMove = true;
 		if (getDistance (waypoint.transform, transform) <= .1f) {
-			//goTo (waypoint.transform);
+			//Debug.Log (index +" " +  getDistance (waypoint.transform, transform));
 			index++;
-			if (index > 3)
-				index = 1;
-			waypoint = GameObject.Find ("waypoint"+index).transform;
-			navMeshAgent.SetDestination(waypoint.position);
+			if (index > 4)
+				index = 1;			
 		}
+		waypoint = GameObject.Find ("waypoint"+index).transform;
+		navMeshAgent.SetDestination(waypoint.position);
+
 
 	}
 	int time = 0;
