@@ -44,6 +44,7 @@ public class soundManager : MonoBehaviour {
 		AudioSource src = newEmptySrc.GetComponent<AudioSource>();
 		//getting the audioSource on the new emptySource //empty source is child of soundManager
 		newEmptySrc.transform.parent = transform;
+		print ("done");
 		src.clip = clip;
 		src.Play ();
 	}
