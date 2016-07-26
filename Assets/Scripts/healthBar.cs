@@ -21,13 +21,15 @@ public class healthBar : MonoBehaviour {
 		bar.fillAmount -= 1f/20f;
 	}
 	public void hit(){
-		bar.fillAmount -= .01f;
+		bar.fillAmount -= .05f;
+		StartCoroutine (flashRed ());
 	}
 
 	IEnumerator flashRed(){
 		redFlash.sprite = red;
 		yield return new WaitForSeconds (.1f);
 		redFlash.sprite = no;
+		print ("thou hast been hit");
 
 	}
 

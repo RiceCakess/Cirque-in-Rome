@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class chariotMovement : MonoBehaviour {
 	public float movementSpeed = 10f;
 	public float stamina = 20f;
-	public float health = 100;
+	public float health = 20;
 	public float speed = 100.0f;
 	float desiredSpeed = 0;
 	float currentSpeed = 0;
@@ -33,7 +33,7 @@ public class chariotMovement : MonoBehaviour {
 		if (Input.GetKey (KeyCode.Space)) {
 			Cursor.visible = !Cursor.visible;
 		}
-		if (health < 0) {
+		if (health < 1) {
 			SceneManager.LoadScene (2);
 		}
 
@@ -65,6 +65,7 @@ public class chariotMovement : MonoBehaviour {
 			heal.GetComponent<healthBar> ().hit ();
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
 			health -= 1;
+			print ("health is" + health);
 
 		}
 //		if (col.gameObject.tag == "circus") {
