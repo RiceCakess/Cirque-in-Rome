@@ -14,8 +14,9 @@ public class AIController : MonoBehaviour {
 	public Vector3 rotationVector3 = new Vector3(0,0,0);
 	// Use this for initialization
 	void Start () {
-		
+
 	}
+
 	// Update is called once per frame
 	void Update () {
 		checkInput ();
@@ -26,38 +27,35 @@ public class AIController : MonoBehaviour {
 		}
 	}
 	void checkInput(){
-		
-			//transform.Rotate ( rotationVector3 * Time.deltaTime * speed);
+		//transform.Rotate ( rotationVector3 * Time.deltaTime * speed);
 
-			if (currentInput.Contains (KeyCode.Q)) {
-				accel = .5f;
-			} else {
-				accel = .02f;
-			}
-			if (currentInput.Contains (KeyCode.W)) {
-				dirVector = transform.forward; 
-				desiredSpeed = movementSpeed;
-			} else if (currentInput.Contains (KeyCode.A)) {
-				dirVector = -transform.right; 
-				desiredSpeed = movementSpeed * .5f;
-			} else if (currentInput.Contains (KeyCode.D)) {
-				dirVector = transform.right; 
-				desiredSpeed = movementSpeed * .5f;
-			} else {
-				desiredSpeed = 0;
-			}
-			//x	Debug.Log (desiredSpeed + " " + currentSpeed + " " + accel);
-			if (currentSpeed < desiredSpeed) {
-				currentSpeed += accel;
-			} else if (currentSpeed > desiredSpeed) {
-				currentSpeed -= deccel;
-			}
+		if (currentInput.Contains(KeyCode.Q)) {
+			accel = .5f;
+		} else {
+			accel = .02f;
+		}
+		if (currentInput.Contains(KeyCode.W)) {
+			dirVector = transform.forward; 
+			desiredSpeed = movementSpeed;
+		} else if (currentInput.Contains (KeyCode.A)) {
+			dirVector = -transform.right; 
+			desiredSpeed = movementSpeed * .5f;
+		} else if (currentInput.Contains (KeyCode.D)) {
+			dirVector = transform.right; 
+			desiredSpeed = movementSpeed * .5f;
+		} else {
+			desiredSpeed = 0;
+		}
+		//x	Debug.Log (desiredSpeed + " " + currentSpeed + " " + accel);
+		if (currentSpeed < desiredSpeed) {
+			currentSpeed += accel;
+		} else if (currentSpeed > desiredSpeed) {
+			currentSpeed -= deccel;
+		}
 
-			transform.position += dirVector * Time.deltaTime * currentSpeed;
-			//amanda's attempt at a fix
-			transform.position = new Vector3 (transform.position.x, .7f, transform.position.z);
-			currentInput.Clear ();
-			rotation = 0;
-
+		transform.position += dirVector * Time.deltaTime * currentSpeed;
+		currentInput.Clear ();
+		transform.position = new Vector3 (transform.position.x, .7f, transform.position.z);
+		rotation = 0;
 	}
 }

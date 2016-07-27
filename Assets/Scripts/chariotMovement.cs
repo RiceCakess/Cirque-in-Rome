@@ -13,10 +13,8 @@ public class chariotMovement : MonoBehaviour {
 	float deccel = .05f;
 	Vector3 dirVector = new Vector3(0,0,0);
 	// Use this for initialization
-	GameObject camera;
 	void Start () {
 		StartCoroutine (rotateWheels ());
-		camera = transform.GetChild(0).transform.gameObject;
 		StartCoroutine (rotateCam ());
 		soundManager.instance.playBgm (soundManager.instance.bgm);
 		soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
@@ -58,7 +56,7 @@ public class chariotMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
-			col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
+			//col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
 			Debug.Log("test");
 			GameObject healthImage = GameObject.FindWithTag ("health");
 			Image heal = healthImage.GetComponent<Image> ();
@@ -99,7 +97,9 @@ public class chariotMovement : MonoBehaviour {
 		} else {
 			desiredSpeed = 0;
 		}
-
+		if (Input.GetKey (KeyCode.R)) {
+			SceneManager.LoadScene (0);
+		}
 		if (Input.GetKey (KeyCode.E)) {
 			print ("spear key pressed");
 			GameObject spear = GameObject.FindWithTag ("spear");
