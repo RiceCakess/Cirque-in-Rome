@@ -3,10 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class chariotMovement : MonoBehaviour {
+	public float thrust;
 	public float movementSpeed = 10f;
 	public float stamina = 20f;
 	public float health = 20;
-	public float speed = 100.0f;
+	float speed = 10f;
 	float desiredSpeed = 0;
 	float currentSpeed = 0;
 	float accel = .02f;
@@ -81,21 +82,20 @@ public class chariotMovement : MonoBehaviour {
 			health.GetComponent<healthBar> ().hitStamina ();
 			print ("hit");
 			stamina--;
-			accel = .5f;
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust * 5);
+			//accel = .5f;
 		} else {
-			accel = .02f;
+			//accel = .02f;
 		}
 		if (Input.GetKey (KeyCode.W)) {
-			dirVector = transform.forward; 
-			desiredSpeed = movementSpeed;
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust);
 		} else if (Input.GetKey (KeyCode.A)) {
-			dirVector = -transform.right; 
-			desiredSpeed = movementSpeed * .5f;
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.left * thrust);
 		} else if (Input.GetKey (KeyCode.D)) {
-			dirVector = transform.right; 
-			desiredSpeed = movementSpeed * .5f;
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.right * thrust);
 		} else {
-			desiredSpeed = 0;
+			//no S
+			//desiredSpeed = 0;
 		}
 		if (Input.GetKey (KeyCode.R)) {
 			SceneManager.LoadScene (0);
@@ -108,13 +108,12 @@ public class chariotMovement : MonoBehaviour {
 		}
 
 		//x	Debug.Log (desiredSpeed + " " + currentSpeed + " " + accel);
-		if (currentSpeed < desiredSpeed) {
-			currentSpeed += accel;
-		} else if (currentSpeed > desiredSpeed) {
-			currentSpeed -= deccel;
-		}
+//		if (currentSpeed < desiredSpeed) {
+//			currentSpeed += accel;
+//		} else if (currentSpeed > desiredSpeed) {
+//			currentSpeed -= deccel;
+//		}
 
- 		transform.position += dirVector * Time.deltaTime * currentSpeed;
 		transform.position = new Vector3 (transform.position.x, 0.4f, transform.position.z);
 
 	}
