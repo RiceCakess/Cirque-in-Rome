@@ -74,7 +74,7 @@ public class chariotMovement : MonoBehaviour {
 	}
 
 	void checkInput(){
-		transform.Rotate (new Vector3 (0, Input.GetAxis ("Mouse X"), 0) * Time.deltaTime * speed);
+		transform.Rotate (new Vector3 (0, Input.GetAxis ("Mouse X"), 0) * Time.deltaTime * speed * 2);
 
 		if (Input.GetMouseButtonUp (0) && stamina >= 0) {
 			GameObject bar = GameObject.FindWithTag ("stamina");
@@ -82,17 +82,17 @@ public class chariotMovement : MonoBehaviour {
 			health.GetComponent<healthBar> ().hitStamina ();
 			print ("hit");
 			stamina--;
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust * 5);
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust * 5, ForceMode.Acceleration);
 			//accel = .5f;
 		} else {
 			//accel = .02f;
 		}
 		if (Input.GetKey (KeyCode.W)) {
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust);
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.A)) {
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.left * thrust);
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.D)) {
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.right * thrust);
+			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.right * thrust, ForceMode.Acceleration);
 		} else {
 			//no S
 			//desiredSpeed = 0;
@@ -114,7 +114,7 @@ public class chariotMovement : MonoBehaviour {
 //			currentSpeed -= deccel;
 //		}
 
-		transform.position = new Vector3 (transform.position.x, 0.4f, transform.position.z);
+		transform.position = new Vector3 (transform.position.x, 0.6f, transform.position.z);
 
 	}
 	void OnTriggerExit(Collider col){
