@@ -3,24 +3,26 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class chariotMovement : MonoBehaviour {
-	public Transform cam;
-	public Transform colCam;
 	public float thrust;
 	public float movementSpeed = 10f;
 	public float stamina = 20f;
 	public float health = 20;
 	float speed = 10f;
-	float desiredSpeed = 0;
 	float currentSpeed = 0;
-	float accel = .02f;
-	float deccel = .05f;
+	float maxSpeed = 10f;
+	public FLController flc;
+	Rigidbody rb;
 	Vector3 dirVector = new Vector3(0,0,0);
 	// Use this for initialization
 	void Start () {
+		rb = GetComponent<Rigidbody> ();
 		StartCoroutine (rotateWheels ());
 		StartCoroutine (rotateCam ());
+		flc.enable ();
+		StartCoroutine (rideEffect ());
 		soundManager.instance.playBgm (soundManager.instance.bgm);
 		soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
+
 	}
 	IEnumerator rotateWheels(){
 		GetComponent<Animation> ().Play ("rotate");
@@ -38,6 +40,22 @@ public class chariotMovement : MonoBehaviour {
 			SceneManager.LoadScene (2);
 		}
 
+	}
+	float raiseValue;
+	IEnumerator rideEffect(){
+		raiseValue = Mathf.Floor(rb.velocity.magnitude * 2) / 2;
+		raiseValue /= 2;
+		flc.moveOne (2,raiseValue);
+		flc.moveOne (3,raiseValue);
+		flc.moveOne (0,0);
+		flc.moveOne (1,0);
+		yield return new WaitForSeconds (2.0f);
+		flc.moveOne (2,0);
+		flc.moveOne (3,0);
+		flc.moveOne (0,raiseValue);
+		flc.moveOne (1,raiseValue);
+		yield return new WaitForSeconds (2.0f);
+		StartCoroutine (rideEffect());
 	}
 	IEnumerator rotateCam(){
 		float speed = currentSpeed;
@@ -58,59 +76,52 @@ public class chariotMovement : MonoBehaviour {
 
 
 	void OnCollisionEnter(Collision col){
-		//if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
-			cam = transform;
-			Vector3 selfVec = cam.InverseTransformPoint (transform.position);
-			colCam = col.transform;
-			Vector3 colVec = colCam.InverseTransformPoint (col.transform.position);
-			if (selfVec.x > colVec.x) {
-				print ("selfVec.x > colVec.x");
-			} else if (selfVec.x < colVec.x) {
-				print ("selfVec.x < colVec.x");
-			} else if (selfVec.x == colVec.x) {
-				print ("selfVec.x = colVec.x");
-			}
-
-			//col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
-			//Debug.Log("test");
+		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
+			//col.gameObject.rb.AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
+			Debug.Log("test");
 			GameObject healthImage = GameObject.FindWithTag ("health");
 			Image heal = healthImage.GetComponent<Image> ();
 			heal.GetComponent<healthBar> ().hit ();
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
 			health -= 1;
-			//print ("health is" + health);
-
-		//}
+			print ("health is" + health);
+			flc.RumbleDown ();
+		}
 //		if (col.gameObject.tag == "circus") {
 //			currentSpeed /= 2;
 //
 //		}
 	}
-
+	bool controller = true;
 	void checkInput(){
-		transform.Rotate (new Vector3 (0, Input.GetAxis ("Mouse X"), 0) * Time.deltaTime * speed * 2);
+		if(controller)
+			transform.Rotate (new Vector3 (0, Input.GetAxis ("Horizontal"), 0) * Time.deltaTime * speed * 5);
+		else
+			transform.Rotate (new Vector3 (0, Input.GetAxis ("Mouse X"), 0) * Time.deltaTime * speed * 2);
 
-		if (Input.GetMouseButtonUp (0) && stamina >= 0) {
+		if ((Input.GetMouseButtonUp (0) || Input.GetKeyDown("joystick button 0")) && stamina >= 0) {
 			GameObject bar = GameObject.FindWithTag ("stamina");
 			Image health = bar.GetComponent<Image> ();
 			health.GetComponent<healthBar> ().hitStamina ();
 			print ("hit");
 			stamina--;
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust * 5, ForceMode.Acceleration);
-			//accel = .5f;
+			rb.AddRelativeForce (Vector3.forward * thrust * 5, ForceMode.Acceleration);
 		} else {
-			//accel = .02f;
+			//rb.velocity *= .9f;
 		}
-		if (Input.GetKey (KeyCode.W)) {
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.forward * thrust, ForceMode.Acceleration);
+		//Debug.Log (Input.GetAxis ("Mouse ScrollWheel"));
+		if (Input.GetKey (KeyCode.W) || Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0.01f && rb.velocity.magnitude < maxSpeed) {
+			rb.AddRelativeForce (Vector3.forward * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.A)) {
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
+			rb.AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.D)) {
-			GetComponent<Rigidbody> ().AddRelativeForce (Vector3.right * thrust, ForceMode.Acceleration);
+			rb.AddRelativeForce (Vector3.right * thrust, ForceMode.Acceleration);
 		} else {
 			//no S
 			//desiredSpeed = 0;
 		}
+		//Debug.Log (rb.velocity.magnitude  + " " + (rb.velocity.magnitude < maxSpeed));
+
 		if (Input.GetKey (KeyCode.R)) {
 			SceneManager.LoadScene (0);
 		}
@@ -120,13 +131,6 @@ public class chariotMovement : MonoBehaviour {
 			spear.GetComponent<spearScript> ().throwSpear ();
 
 		}
-
-		//x	Debug.Log (desiredSpeed + " " + currentSpeed + " " + accel);
-//		if (currentSpeed < desiredSpeed) {
-//			currentSpeed += accel;
-//		} else if (currentSpeed > desiredSpeed) {
-//			currentSpeed -= deccel;
-//		}
 
 		transform.position = new Vector3 (transform.position.x, 0.6f, transform.position.z);
 

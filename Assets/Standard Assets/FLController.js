@@ -440,27 +440,27 @@ function updateFloor(){
 			}
 			else
 			{
-			
-				minVoltage = 4f;
-				maxVoltage = 5.8f;
-				
-				floorSpeed = FloorSpeed.Normal;
-				
-				if(isRaising0 == true && getVoltage(0) >= maxVoltage){ isRaising0 = false;}
-				if(isRaising0 == false && getVoltage(0) <= minVoltage){ isRaising0 = true;}
-				
-				
-				offset0 = (isRaising0 == true) ? Time.deltaTime * floorSpeed.GetHashCode() : -(Time.deltaTime * floorSpeed.GetHashCode());
-				offset2 = offset0 = Mathf.Clamp((getVoltage(0) + offset0),0, 10);
-				
-				if(offset0 < midVoltage){
-					offset3 = offset1 = midVoltage + (midVoltage - offset0);
-				}
-				else{
-					offset3 = offset1 = midVoltage - (offset0 - midVoltage);
-			
-				}
-				
+//			
+//				minVoltage = 4f;
+//				maxVoltage = 5.8f;
+//								
+//				floorSpeed = FloorSpeed.Normal;
+//				
+//				if(isRaising0 == true && getVoltage(0) >= maxVoltage){ isRaising0 = false;}
+//				if(isRaising0 == false && getVoltage(0) <= minVoltage){ isRaising0 = true;}
+//				
+//				
+//				offset0 = (isRaising0 == true) ? Time.deltaTime * floorSpeed.GetHashCode() : -(Time.deltaTime * floorSpeed.GetHashCode());
+//				offset2 = offset0 = Mathf.Clamp((getVoltage(0) + offset0),0, 10);
+//				
+//				if(offset0 < midVoltage){
+//					offset3 = offset1 = midVoltage + (midVoltage - offset0);
+//				}
+//				else{
+//					offset3 = offset1 = midVoltage - (offset0 - midVoltage);
+//			
+//				}
+				offset0 = offset1 = offset2 = offset3 = 1;
 				moveOne(0,Mathf.Clamp(offset0,0, 10));
 				moveOne(1,Mathf.Clamp(offset1,0, 10));
 				moveOne(2,Mathf.Clamp(offset2,0, 10));
@@ -546,7 +546,7 @@ function lowerFloor (){
 	}
 }
 
-private function moveOne (index : int, voltage : float){
+function moveOne (index : int, voltage : float){
 	// set the voltage (translates to floor height) of the provided bladder to the provided voltage
 	// voltage = 0.0F is fully lowered
 	// voltage = 5.0F is raised halfway
@@ -554,10 +554,10 @@ private function moveOne (index : int, voltage : float){
 	motionFloor.outputs[index].Voltage = voltage;
 }
 
-private function moveAll (voltage : float){
+function moveAll (voltage : float){
 	// for all four bladders set the provided voltage (translates to height) in a range of 0.0F - 10.0F
+
 	for (var i : int = 0; i < 4; i++) {
 		motionFloor.outputs[i].Voltage = voltage;
 	}
 }
-	
