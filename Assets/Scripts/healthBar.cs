@@ -18,7 +18,7 @@ public class healthBar : MonoBehaviour {
 		
 	}
 	public void hitStamina(){
-		bar.fillAmount -= 1f/20f;
+		bar.fillAmount -= 1f/50f;
 	}
 	public void hit(){
 		bar.fillAmount -= .05f;

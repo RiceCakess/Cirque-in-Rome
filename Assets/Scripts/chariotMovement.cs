@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 public class chariotMovement : MonoBehaviour {
 	public float thrust;
 	public float movementSpeed = 10f;
-	public float stamina = 20f;
+	public float stamina = 100f;
 	public float health = 20;
 	float speed = 10f;
 	float currentSpeed = 0;
 	float maxSpeed = 10f;
+	bool invincible = false;
 	public FLController flc;
 	Rigidbody rb;
 	Vector3 dirVector = new Vector3(0,0,0);
@@ -73,17 +74,32 @@ public class chariotMovement : MonoBehaviour {
 		//soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
 		StartCoroutine (rotateCam ());
 	}
+	IEnumerator invincibility(){
+		print ("invincible");
+		invincible = true;
+		yield return new WaitForSeconds (1.5f);
+		invincible = false;
+		print ("not invincible");
 
+	}
 
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
+			
+//			if (invincible == false) {
+//				invincible == true;
+//			}
 			//col.gameObject.rb.AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
-			Debug.Log("test");
-			GameObject healthImage = GameObject.FindWithTag ("health");
-			Image heal = healthImage.GetComponent<Image> ();
-			heal.GetComponent<healthBar> ().hit ();
+			//Debug.Log("test");
+
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
-			health -= 1;
+			if (invincible == false) {
+				GameObject healthImage = GameObject.FindWithTag ("health");
+				Image heal = healthImage.GetComponent<Image> ();
+				heal.GetComponent<healthBar> ().hit ();
+				health -= 1;
+				StartCoroutine (invincibility ());
+			}
 			print ("health is" + health);
 			flc.RumbleDown ();
 		}
@@ -105,7 +121,7 @@ public class chariotMovement : MonoBehaviour {
 			health.GetComponent<healthBar> ().hitStamina ();
 			print ("hit");
 			stamina--;
-			rb.AddRelativeForce (Vector3.forward * thrust * 5, ForceMode.Acceleration);
+			rb.AddRelativeForce (Vector3.forward * thrust * 50, ForceMode.Acceleration);
 		}
 		//Debug.Log (Input.GetAxis ("Mouse ScrollWheel"));
 		else if (Input.GetKey (KeyCode.W) || Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0.01f && rb.velocity.magnitude < maxSpeed) {
