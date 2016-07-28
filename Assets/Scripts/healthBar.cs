@@ -29,7 +29,7 @@ public class healthBar : MonoBehaviour {
 		redFlash.sprite = red;
 		yield return new WaitForSeconds (.1f);
 		redFlash.sprite = no;
-		print ("thou hast been hit");
+		//print ("thou hast been hit");
 
 	}
 

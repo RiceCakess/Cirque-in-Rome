@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class chariotMovement : MonoBehaviour {
+	public Transform cam;
+	public Transform colCam;
 	public float thrust;
 	public float movementSpeed = 10f;
 	public float stamina = 20f;
@@ -56,17 +58,29 @@ public class chariotMovement : MonoBehaviour {
 
 
 	void OnCollisionEnter(Collision col){
-		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
+		//if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
+			cam = transform;
+			Vector3 selfVec = cam.InverseTransformPoint (transform.position);
+			colCam = col.transform;
+			Vector3 colVec = colCam.InverseTransformPoint (col.transform.position);
+			if (selfVec.x > colVec.x) {
+				print ("selfVec.x > colVec.x");
+			} else if (selfVec.x < colVec.x) {
+				print ("selfVec.x < colVec.x");
+			} else if (selfVec.x == colVec.x) {
+				print ("selfVec.x = colVec.x");
+			}
+
 			//col.gameObject.GetComponent<Rigidbody> ().AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
-			Debug.Log("test");
+			//Debug.Log("test");
 			GameObject healthImage = GameObject.FindWithTag ("health");
 			Image heal = healthImage.GetComponent<Image> ();
 			heal.GetComponent<healthBar> ().hit ();
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
 			health -= 1;
-			print ("health is" + health);
+			//print ("health is" + health);
 
-		}
+		//}
 //		if (col.gameObject.tag == "circus") {
 //			currentSpeed /= 2;
 //
