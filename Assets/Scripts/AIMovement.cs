@@ -7,27 +7,21 @@ public class AIMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		control = GetComponent<AIController> ();
-		currentInput = codes [(int)(Random.value * 3)];
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
 		waypoint = GameObject.Find ("waypoint1").transform;
 		navMeshAgent.SetDestination(waypoint.position);
 		chariotObjects = GameObject.FindGameObjectsWithTag ("otherChariot");
 	}
 	Transform waypoint;
-	KeyCode currentInput;
-	KeyCode[] codes = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.Q };
 	NavMeshAgent navMeshAgent;
 	GameObject[] chariotObjects;
 	int index = 1;
-	Vector3 lastPosition;
-	int notMoving = 0;
-	int time = 0;
-	public bool debug = false;
+	int maxIndex = 4;
 	// Update is called once per frame
 	void Update () {
 
 		foreach (GameObject g in chariotObjects) {
-			if (getDistance (g.transform, transform) < .01f) {
+			if (getDistance (g.transform, transform) < .1f) {
 				if (Random.value > .5f) {
 					control.sendInput (KeyCode.Q);
 				} else {
@@ -39,32 +33,16 @@ public class AIMovement : MonoBehaviour {
 			control.sendInput (KeyCode.W);
 		else
 			canMove = true;
-		if (getDistance (waypoint.transform, transform) <= .1f) {
+		if (getDistance (waypoint.transform, transform) <= .05f) {
 			index++;
-			if (index > 4)
+			if (index > maxIndex)
 				index = 1;
 			waypoint = GameObject.Find ("waypoint"+index).transform;
-			navMeshAgent.SetDestination(waypoint.position += new Vector3(Random.value, 0, Random.value));
+			navMeshAgent.SetDestination(waypoint.position);
+			//Debug.Log (index + " " + transform.gameObject.name);
 		}
-
-		/*if (lastPosition != null) {
-			if (getDistance (lastPosition, transform.position) < .009f) {
-				notMoving++;
-			} else if (notMoving > 3) {
-				notMoving = 0;
-			}
-			if(debug)
-				Debug.Log (getDistance (transform.position, lastPosition) + " " + notMoving);
-			lastPosition = transform.position;
-		} else {
-			lastPosition = transform.position;
-		}
-		if (notMoving > 8 && control.currentSpeed > 6f) {
-			transform.Rotate (new Vector3 (0, 180f, 0));
-			notMoving = 0;
-		}
-		time++;*/
-
+		//Debug.DrawRay (transform.position,waypoint.position,Color.red); 
+		//navMeshAgent.speed = GetComponent<Rigidbody> ().velocity.x +  GetComponent<Rigidbody> ().velocity.z;
 	}
 	void goTo(Transform pos){
 		float step = 2f * Time.deltaTime;
