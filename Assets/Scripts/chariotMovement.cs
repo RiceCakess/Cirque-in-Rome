@@ -106,11 +106,9 @@ public class chariotMovement : MonoBehaviour {
 			print ("hit");
 			stamina--;
 			rb.AddRelativeForce (Vector3.forward * thrust * 5, ForceMode.Acceleration);
-		} else {
-			//rb.velocity *= .9f;
 		}
 		//Debug.Log (Input.GetAxis ("Mouse ScrollWheel"));
-		if (Input.GetKey (KeyCode.W) || Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0.01f && rb.velocity.magnitude < maxSpeed) {
+		else if (Input.GetKey (KeyCode.W) || Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0.01f && rb.velocity.magnitude < maxSpeed) {
 			rb.AddRelativeForce (Vector3.forward * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.A)) {
 			rb.AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
@@ -118,6 +116,7 @@ public class chariotMovement : MonoBehaviour {
 			rb.AddRelativeForce (Vector3.right * thrust, ForceMode.Acceleration);
 		} else {
 			//no S
+			rb.velocity = rb.velocity * .99f;
 			//desiredSpeed = 0;
 		}
 		//Debug.Log (rb.velocity.magnitude  + " " + (rb.velocity.magnitude < maxSpeed));
