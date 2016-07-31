@@ -47,7 +47,7 @@ public class AIController : MonoBehaviour {
 			currentSpeed -= deccel;
 		}*/
 		GetComponent<Rigidbody> ().AddRelativeForce (dirVector * 2f);
-		Debug.Log (thrust);
+		//Debug.Log (thrust);
 		currentInput.Clear ();
 		transform.position = new Vector3 (transform.position.x, .7f, transform.position.z);
 		//rotation = 0;

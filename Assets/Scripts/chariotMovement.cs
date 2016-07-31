@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class chariotMovement : MonoBehaviour {
 	public float thrust;
 	public float movementSpeed = 10f;
-	public float stamina = 100f;
+	public float stamina = 50f;
 	public float health = 20;
 	float speed = 10f;
 	float currentSpeed = 0;
@@ -128,11 +128,13 @@ public class chariotMovement : MonoBehaviour {
 			rb.AddRelativeForce (Vector3.forward * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.A)) {
 			rb.AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
+			rb.velocity = rb.velocity * .98f;
 		} else if (Input.GetKey (KeyCode.D)) {
 			rb.AddRelativeForce (Vector3.right * thrust, ForceMode.Acceleration);
+			rb.velocity = rb.velocity * .98f;
 		} else {
 			//no S
-			rb.velocity = rb.velocity * .99f;
+			rb.velocity = rb.velocity * .98f;
 			//desiredSpeed = 0;
 		}
 		//Debug.Log (rb.velocity.magnitude  + " " + (rb.velocity.magnitude < maxSpeed));

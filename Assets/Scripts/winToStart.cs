@@ -4,20 +4,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class winToStart : MonoBehaviour {
-	Button btn;
+
 	// Use this for initialization
 	void Start () {
-		btn = GetComponent<Button> ();
-		btn.onClick.AddListener (Click);
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Input.GetKeyDown ("joystick button 0") || Input.GetKeyDown(KeyCode.Space) ){
+			SceneManager.LoadScene (0);
+
+		}
 	}
 
-	void Click(){
-		SceneManager.LoadScene (0);
-	}
 
 }
