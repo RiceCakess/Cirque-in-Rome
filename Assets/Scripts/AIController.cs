@@ -12,7 +12,6 @@ public class AIController : MonoBehaviour {
 	List<KeyCode> currentInput = new List<KeyCode>();
 	public float rotation = 0;
 	public Vector3 rotationVector3 = new Vector3(0,0,0);
-	// Use 这个 (zhè ge) for initialization
 	void Start () {
 
 	}

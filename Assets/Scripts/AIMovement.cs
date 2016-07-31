@@ -16,7 +16,7 @@ public class AIMovement : MonoBehaviour {
 	NavMeshAgent navMeshAgent;
 	GameObject[] chariotObjects;
 	int index = 1;
-	int maxIndex = 4;
+	int maxIndex = 7;
 	// Update is called once per frame
 	void Update () {
 
