@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3cdc8d7f799e59f4d87c4bd0345ba731
-timeCreated: 1469502050
+guid: 772bc91004e4d804886f8823a4fd5afd
+timeCreated: 1469997041
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,26 +8,26 @@ ModelImporter:
     100000: back
     100002: bottom
     100004: group
-    100006: //RootNode
-    100008: left
-    100010: pCube1
-    100012: pCube2
-    100014: pCube3
-    100016: pCube4
-    100018: pCube5
-    100020: pCube6
+    100006: left
+    100008: pCube1
+    100010: pCube2
+    100012: pCube3
+    100014: pCube4
+    100016: pCube5
+    100018: pCube6
+    100020: //RootNode
     100022: polySurface1
     400000: back
     400002: bottom
     400004: group
-    400006: //RootNode
-    400008: left
-    400010: pCube1
-    400012: pCube2
-    400014: pCube3
-    400016: pCube4
-    400018: pCube5
-    400020: pCube6
+    400006: left
+    400008: pCube1
+    400010: pCube2
+    400012: pCube3
+    400014: pCube4
+    400016: pCube5
+    400018: pCube6
+    400020: //RootNode
     400022: polySurface1
     2300000: pCube1
     2300002: pCube2
@@ -50,18 +50,10 @@ ModelImporter:
     4300008: pCube4
     4300010: pCube5
     4300012: pCube6
-    6400000: pCube1
-    6400002: pCube2
-    6400004: pCube3
-    6400006: pCube4
-    6400008: pCube5
-    6400010: pCube6
-    6400012: polySurface1
     7400000: Take 001
     9500000: //RootNode
-    11100000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -80,59 +72,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 60
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: back
-        weight: 1
-      - path: bottom
-        weight: 1
-      - path: group
-        weight: 1
-      - path: left
-        weight: 1
-      - path: polySurface1
-        weight: 1
-      - path: polySurface1/pCube1
-        weight: 1
-      - path: polySurface1/pCube2
-        weight: 1
-      - path: polySurface1/pCube3
-        weight: 1
-      - path: polySurface1/pCube4
-        weight: 1
-      - path: polySurface1/pCube5
-        weight: 1
-      - path: polySurface1/pCube6
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -170,7 +110,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -51,15 +51,9 @@ public class AIController : MonoBehaviour {
 			currentSpeed += accel;
 		} else if (currentSpeed > desiredSpeed) {
 			currentSpeed -= deccel;
-<<<<<<< HEAD
-		}*/
-		GetComponent<Rigidbody> ().AddRelativeForce (dirVector * 2f);
-		//Debug.Log (thrust);
-=======
 		}
 
 		transform.position += dirVector * Time.deltaTime * currentSpeed;
->>>>>>> ece606d18c71f4901c1ba95fcb892089f93dee56
 		currentInput.Clear ();
 		transform.position = new Vector3 (transform.position.x, .7f, transform.position.z);
 		rotation = 0;

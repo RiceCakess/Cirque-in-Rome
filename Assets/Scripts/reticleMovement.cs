@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class reticleMovement : MonoBehaviour {
 	Image img;
-	Sprite reticle;
+	//Sprite reticle;
 	bool controller = true;
 	public float speed = 10;
 	// Use this for initialization
 	void Start () {
 		img = GetComponent<Image> ();
-		reticle = img.sprite;
+		//reticle = img.sprite;
 	}
 	
 	// Update is called once per frame

@@ -54,7 +54,7 @@ public class chariotMovement : MonoBehaviour {
 			transform.Rotate (0.2f, 0, 0);
 			//Debug.Log ("current speed:" + currentSpeed);
 			yield return new WaitForSeconds (.02f);
-			}
+		}
 		yield return new WaitForSeconds (.02f);
 		for(int i = 0; i < 12 - speed; i++){
 			//Debug.Log ("current speed:" + currentSpeed);
@@ -85,10 +85,10 @@ public class chariotMovement : MonoBehaviour {
 			}
 			print ("health is" + health);
 		}
-//		if (col.gameObject.tag == "circus") {
-//			currentSpeed /= 2;
-//
-//		}
+		//		if (col.gameObject.tag == "circus") {
+		//			currentSpeed /= 2;
+		//
+		//		}
 	}
 	bool controller = true;
 	void checkInput(){
@@ -109,10 +109,12 @@ public class chariotMovement : MonoBehaviour {
 		else if (Input.GetKey (KeyCode.W) || Mathf.Abs(Input.GetAxis("p1 Trigger")) > 0.01f && rb.velocity.magnitude < maxSpeed) {
 			rb.AddRelativeForce (Vector3.forward * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.A)) {
-			rb.AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
+			transform.Rotate (new Vector3 (0, -1 * Time.deltaTime * speed * 2, 0));
+			//rb.AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
 			rb.velocity = rb.velocity * .98f;
 		} else if (Input.GetKey (KeyCode.D)) {
-			rb.AddRelativeForce (Vector3.right * thrust, ForceMode.Acceleration);
+			transform.Rotate (new Vector3 (0, Time.deltaTime * speed * 2, 0));
+			//rb.AddRelativeForce (Vector3.right * thrust, ForceMode.Acceleration);
 			rb.velocity = rb.velocity * .98f;
 		} else {
 			//no S

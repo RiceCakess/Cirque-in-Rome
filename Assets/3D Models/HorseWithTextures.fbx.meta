@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3cdc8d7f799e59f4d87c4bd0345ba731
-timeCreated: 1469502050
+guid: 762e5d33e78530f4fa5d1e40b1653f99
+timeCreated: 1469997371
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -50,18 +50,11 @@ ModelImporter:
     4300008: pCube4
     4300010: pCube5
     4300012: pCube6
-    6400000: pCube1
-    6400002: pCube2
-    6400004: pCube3
-    6400006: pCube4
-    6400008: pCube5
-    6400010: pCube6
-    6400012: polySurface1
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -132,7 +125,7 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
