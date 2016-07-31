@@ -11,7 +11,7 @@ public class chariotMovement : MonoBehaviour {
 	float currentSpeed = 0;
 	float maxSpeed = 10f;
 	bool invincible = false;
-	public FLController flc;
+	public FloorController flc;
 	Rigidbody rb;
 	Vector3 dirVector = new Vector3(0,0,0);
 	// Use this for initialization
@@ -44,19 +44,9 @@ public class chariotMovement : MonoBehaviour {
 	}
 	float raiseValue;
 	IEnumerator rideEffect(){
-		raiseValue = Mathf.Floor(rb.velocity.magnitude * 2) / 2;
-		raiseValue /= 2;
-		flc.moveOne (2,raiseValue);
-		flc.moveOne (3,raiseValue);
-		flc.moveOne (0,0);
-		flc.moveOne (1,0);
-		yield return new WaitForSeconds (2.0f);
-		flc.moveOne (2,0);
-		flc.moveOne (3,0);
-		flc.moveOne (0,raiseValue);
-		flc.moveOne (1,raiseValue);
-		yield return new WaitForSeconds (2.0f);
-		StartCoroutine (rideEffect());
+		/* Write code for riding motion 
+		StartCoroutine (rideEffect());*/
+		return null;
 	}
 	IEnumerator rotateCam(){
 		float speed = currentSpeed;
@@ -85,13 +75,6 @@ public class chariotMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
-			
-//			if (invincible == false) {
-//				invincible == true;
-//			}
-			//col.gameObject.rb.AddForce (-col.gameObject.GetComponent<Rigidbody>().transform.right * 200f);
-			//Debug.Log("test");
-
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
 			if (invincible == false) {
 				GameObject healthImage = GameObject.FindWithTag ("health");
@@ -101,7 +84,6 @@ public class chariotMovement : MonoBehaviour {
 				StartCoroutine (invincibility ());
 			}
 			print ("health is" + health);
-			flc.RumbleDown ();
 		}
 //		if (col.gameObject.tag == "circus") {
 //			currentSpeed /= 2;
@@ -111,7 +93,7 @@ public class chariotMovement : MonoBehaviour {
 	bool controller = true;
 	void checkInput(){
 		if(controller)
-			transform.Rotate (new Vector3 (0, Input.GetAxis ("Horizontal"), 0) * Time.deltaTime * speed * 5);
+			transform.Rotate (new Vector3 (0, Input.GetAxis ("p1 Camera"), 0) * Time.deltaTime * speed * 5);
 		else
 			transform.Rotate (new Vector3 (0, Input.GetAxis ("Mouse X"), 0) * Time.deltaTime * speed * 2);
 
@@ -124,7 +106,7 @@ public class chariotMovement : MonoBehaviour {
 			rb.AddRelativeForce (Vector3.forward * thrust * 50, ForceMode.Acceleration);
 		}
 		//Debug.Log (Input.GetAxis ("Mouse ScrollWheel"));
-		else if (Input.GetKey (KeyCode.W) || Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0.01f && rb.velocity.magnitude < maxSpeed) {
+		else if (Input.GetKey (KeyCode.W) || Mathf.Abs(Input.GetAxis("p1 Trigger")) > 0.01f && rb.velocity.magnitude < maxSpeed) {
 			rb.AddRelativeForce (Vector3.forward * thrust, ForceMode.Acceleration);
 		} else if (Input.GetKey (KeyCode.A)) {
 			rb.AddRelativeForce (Vector3.left * thrust, ForceMode.Acceleration);
