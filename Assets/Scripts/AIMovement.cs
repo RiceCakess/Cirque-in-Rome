@@ -6,17 +6,14 @@ public class AIMovement : MonoBehaviour {
 	AIController control;
 	// Use this for initialization
 	void Start () {
+		Random.seed = System.DateTime.Now.Millisecond + convertToInt(gameObject.name);
 		control = GetComponent<AIController> ();
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
-		waypoint = GameObject.Find ("waypoint1").transform;
-		Vector3 offset = new Vector3 (Random.value*10f, 0, Random.value*10f);
-		Debug.Log (offset);
-		waypoint.position += offset;
-		Debug.Log (waypoint.position);
-		navMeshAgent.SetDestination(waypoint.position);
+		setDestination(GameObject.Find ("waypoint1").transform);
 		chariotObjects = GameObject.FindGameObjectsWithTag ("otherChariot");
 	}
 	Transform waypoint;
+	Vector3 setPosition;
 	NavMeshAgent navMeshAgent;
 	GameObject[] chariotObjects;
 	int index = 1;
@@ -37,19 +34,14 @@ public class AIMovement : MonoBehaviour {
 			control.sendInput (KeyCode.W);
 		else
 			canMove = true;
-		if (getDistance (waypoint.transform, transform) <= .5f) {
+		if (navMeshAgent.remainingDistance <= 10f) {
 			index++;
 			if (index > maxIndex)
 				index = 1;
-			waypoint = GameObject.Find ("waypoint"+index).transform;
-			Vector3 offset = new Vector3 (Random.value, 0, Random.value);
-			waypoint.position += offset;
-			Debug.Log (offset);
-			navMeshAgent.SetDestination(waypoint.position);
-			//Debug.Log (index + " " + transform.gameObject.name);
+			setDestination(GameObject.Find("waypoint" + index).transform);
 		}
-		Debug.DrawRay (transform.position, waypoint.position - transform.position, Color.red); 
-		//navMeshAgent.speed = GetComponent<Rigidbody> ().velocity.x +  GetComponent<Rigidbody> ().velocity.z;
+		//Debug.Log (gameObject.name + " " + navMeshAgent.remainingDistance);
+		//Debug.DrawRay (transform.position, setPosition - transform.position, Color.red); 
 	}
 	void goTo(Transform pos){
 		float step = 2f * Time.deltaTime;
@@ -59,6 +51,11 @@ public class AIMovement : MonoBehaviour {
 		look.y = 0;
 		transform.rotation = Quaternion.LookRotation(look);
 
+	}
+	void setDestination(Transform toWaypoint){
+		waypoint = toWaypoint;
+		setPosition = toWaypoint.transform.position + new Vector3 (Random.value*20f, 0, Random.value*10f);
+		navMeshAgent.SetDestination (setPosition);
 	}
 	float getDistance(Transform d1, Transform d2){
 		float subx = (d1.position.x - d2.position.x);
@@ -72,5 +69,13 @@ public class AIMovement : MonoBehaviour {
 		float hyp = Mathf.Sqrt (subx * subx + subz * subz);
 		return hyp;
 	}
-
+	int convertToInt(string name){
+		if (name == "otherOne")
+			return 1;
+		else if (name == "otherTwo")
+			return 2;
+		else if (name == "otherthree")
+			return 3;
+		return 0;
+	}
 }
