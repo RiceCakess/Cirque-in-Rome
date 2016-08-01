@@ -97,7 +97,7 @@ public class chariotMovement : MonoBehaviour {
 		else
 			transform.Rotate (new Vector3 (0, Input.GetAxis ("Mouse X"), 0) * Time.deltaTime * speed * 2);
 
-		if ((Input.GetMouseButtonUp (0) || Input.GetKeyDown("joystick button 0")) && stamina >= 0) {
+		if ((Input.GetMouseButtonUp (0) || Input.GetKeyDown("joystick 1 button 0")) && stamina >= 0) {
 			GameObject bar = GameObject.FindWithTag ("stamina");
 			Image health = bar.GetComponent<Image> ();
 			health.GetComponent<healthBar> ().hitStamina ();
