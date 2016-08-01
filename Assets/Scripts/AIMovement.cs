@@ -9,6 +9,10 @@ public class AIMovement : MonoBehaviour {
 		control = GetComponent<AIController> ();
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
 		waypoint = GameObject.Find ("waypoint1").transform;
+		Vector3 offset = new Vector3 (Random.value*10f, 0, Random.value*10f);
+		Debug.Log (offset);
+		waypoint.position += offset;
+		Debug.Log (waypoint.position);
 		navMeshAgent.SetDestination(waypoint.position);
 		chariotObjects = GameObject.FindGameObjectsWithTag ("otherChariot");
 	}
@@ -33,15 +37,18 @@ public class AIMovement : MonoBehaviour {
 			control.sendInput (KeyCode.W);
 		else
 			canMove = true;
-		if (getDistance (waypoint.transform, transform) <= .05f) {
+		if (getDistance (waypoint.transform, transform) <= .5f) {
 			index++;
 			if (index > maxIndex)
 				index = 1;
 			waypoint = GameObject.Find ("waypoint"+index).transform;
+			Vector3 offset = new Vector3 (Random.value, 0, Random.value);
+			waypoint.position += offset;
+			Debug.Log (offset);
 			navMeshAgent.SetDestination(waypoint.position);
 			//Debug.Log (index + " " + transform.gameObject.name);
 		}
-		//Debug.DrawRay (transform.position,waypoint.position,Color.red); 
+		Debug.DrawRay (transform.position, waypoint.position - transform.position, Color.red); 
 		//navMeshAgent.speed = GetComponent<Rigidbody> ().velocity.x +  GetComponent<Rigidbody> ().velocity.z;
 	}
 	void goTo(Transform pos){
