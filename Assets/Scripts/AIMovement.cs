@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class AIMovement : MonoBehaviour {
-	bool canMove = true;
+	bool canMove = false;
 	AIController control;
 	GameObject player;
 	// Use this for initialization
 	void Start () {
 		control = GetComponent<AIController> ();
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
-		setDestination(GameObject.Find ("waypoint1").transform);
 		chariotObjects = GameObject.FindGameObjectsWithTag ("otherChariot");
 		player = GameObject.Find ("RollingChariot");
 	}
@@ -22,7 +21,12 @@ public class AIMovement : MonoBehaviour {
 	bool following = false;
 	// Update is called once per frame
 	void Update () {
-
+		if (canMove != player.GetComponent<chariotMovement> ().canMove) {
+			setDestination(GameObject.Find ("waypoint1").transform);
+			canMove = true;
+		}
+		if (!canMove)
+			return;
 		foreach (GameObject g in chariotObjects) {
 			if (getDistance (g.transform, transform) < .3f) {
 				if (Random.value > .5f) {
@@ -52,8 +56,8 @@ public class AIMovement : MonoBehaviour {
 				index = 1;
 			setDestination(GameObject.Find("waypoint" + index).transform);
 		}
-		Debug.Log (gameObject.name + " " + navMeshAgent.remainingDistance + " " + index + " " + following);
-		Debug.DrawRay (transform.position, navMeshAgent.destination - transform.position, Color.red); 
+		//Debug.Log (gameObject.name + " " + navMeshAgent.remainingDistance + " " + index + " " + following);
+		//Debug.DrawRay (transform.position, navMeshAgent.destination - transform.position, Color.red); 
 	}
 	void goTo(Transform pos){
 		float step = 2f * Time.deltaTime;
