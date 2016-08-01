@@ -12,6 +12,7 @@ public class chariotMovement : MonoBehaviour {
 	float maxSpeed = 10f;
 	bool invincible = false;
 	public FloorController flc;
+	public bool canMove = false;
 	Rigidbody rb;
 	Vector3 dirVector = new Vector3(0,0,0);
 	// Use this for initialization
@@ -24,6 +25,7 @@ public class chariotMovement : MonoBehaviour {
 		soundManager.instance.playBgm (soundManager.instance.bgm);
 		soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
 
+
 	}
 	IEnumerator rotateWheels(){
 		GetComponent<Animation> ().Play ("rotate");
@@ -33,6 +35,12 @@ public class chariotMovement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetKey("joystick 1 button 0") || Input.GetKey("joystick 2 button 0")){
+			GameObject.Find ("skipText").GetComponent<Text>().text = "";
+			canMove = true;
+		}
+		if (!canMove)
+			return;
 		checkInput ();
 		if (Input.GetKey (KeyCode.Space)) {
 			Cursor.visible = !Cursor.visible;
@@ -63,6 +71,11 @@ public class chariotMovement : MonoBehaviour {
 		}
 		//soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
 		StartCoroutine (rotateCam ());
+	}
+	IEnumerator startPause(){
+		yield return new WaitForSeconds (25f);
+		GameObject.Find ("skipText").GetComponent<Text>().text = "";
+		canMove = true;
 	}
 	IEnumerator invincibility(){
 		print ("invincible");
