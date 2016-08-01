@@ -15,7 +15,7 @@ public class reticleMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (Input.GetAxis ("p2 Horizontal") + " " + Input.GetAxis ("p2 Vertical"));
+//		Debug.Log (Input.GetAxis ("p2 Horizontal") + " " + Input.GetAxis ("p2 Vertical"));
 		if (controller == true && (Mathf.Abs(Input.GetAxis ("p2 Horizontal")) >= 1 || Mathf.Abs(Input.GetAxis ("p2 Vertical")) >= 1 )) {
 
 			Vector3 desiredPosX = img.rectTransform.anchoredPosition + new Vector2(speed * Input.GetAxis ("p2 Horizontal") * -1, 0);
@@ -35,7 +35,7 @@ public class reticleMovement : MonoBehaviour {
 			}
 			//* Time.deltaTime * speed;
 		} else {
-			print ("controller not used");
+			//print ("controller not used");
 		}
 	}
 }

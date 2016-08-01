@@ -10,8 +10,6 @@ public class AIController : MonoBehaviour {
 	float deccel = .05f;
 	Vector3 dirVector = new Vector3(0,0,0);
 	List<KeyCode> currentInput = new List<KeyCode>();
-	public float rotation = 0;
-	public Vector3 rotationVector3 = new Vector3(0,0,0);
 	void Start () {
 
 	}
@@ -29,7 +27,7 @@ public class AIController : MonoBehaviour {
 		//transform.Rotate ( rotationVector3 * Time.deltaTime * speed);
 
 		if (currentInput.Contains(KeyCode.Q)) {
-			accel = .5f;
+			accel = 10f;
 		} else {
 			accel = .02f;
 		}
@@ -55,6 +53,5 @@ public class AIController : MonoBehaviour {
 		transform.position += dirVector * Time.deltaTime * currentSpeed;
 		currentInput.Clear ();
 		transform.position = new Vector3 (transform.position.x, .7f, transform.position.z);
-		rotation = 0;
 	}
 }

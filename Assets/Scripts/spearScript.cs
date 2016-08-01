@@ -35,7 +35,7 @@ public class spearScript : MonoBehaviour {
 		float horiz = Input.GetAxis ("p2 Horizontal") * -1;
 		Quaternion target = Quaternion.Euler (vert, 0, horiz + 90);
 		transform.rotation = Quaternion.Slerp (transform.rotation, target, Time.deltaTime * smooth);
-		if (Input.GetKeyDown (KeyCode.K) || Input.GetKeyDown("p2 Jab")) {
+		if (Input.GetKeyDown (KeyCode.K) || Input.GetKeyDown("joystick 1 button 0\t")) {
 			if (facingLeft == true) {
 				GetComponent<Rigidbody> ().isKinematic = false;
 				transform.parent = null;

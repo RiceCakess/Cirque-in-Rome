@@ -4,12 +4,14 @@ using System.Collections;
 public class AIMovement : MonoBehaviour {
 	bool canMove = true;
 	AIController control;
+	GameObject player;
 	// Use this for initialization
 	void Start () {
 		control = GetComponent<AIController> ();
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
 		setDestination(GameObject.Find ("waypoint1").transform);
 		chariotObjects = GameObject.FindGameObjectsWithTag ("otherChariot");
+		player = GameObject.Find ("RollingChariot");
 	}
 	Transform waypoint;
 	Vector3 setPosition;
@@ -17,11 +19,12 @@ public class AIMovement : MonoBehaviour {
 	GameObject[] chariotObjects;
 	int index = 1;
 	int maxIndex = 7;
+	bool following = false;
 	// Update is called once per frame
 	void Update () {
 
 		foreach (GameObject g in chariotObjects) {
-			if (getDistance (g.transform, transform) < .1f) {
+			if (getDistance (g.transform, transform) < .3f) {
 				if (Random.value > .5f) {
 					control.sendInput (KeyCode.Q);
 				} else {
@@ -29,6 +32,16 @@ public class AIMovement : MonoBehaviour {
 				}
 			}
 		}
+		if (Random.value > 0.8f) {
+			following = true;
+		}
+		/*if ((transform.position - player.transform.position).magnitude > 0 && (transform.position - player.transform.position).magnitude <= 20f && following) {
+			navMeshAgent.SetDestination (player.transform.position);
+			if (Random.value > .8f) {
+				setDestination(GameObject.Find("waypoint" + index).transform);
+				following = false;
+			}
+		}*/
 		if (canMove)
 			control.sendInput (KeyCode.W);
 		else
@@ -39,8 +52,8 @@ public class AIMovement : MonoBehaviour {
 				index = 1;
 			setDestination(GameObject.Find("waypoint" + index).transform);
 		}
-		//Debug.Log (gameObject.name + " " + navMeshAgent.remainingDistance);
-		//Debug.DrawRay (transform.position, setPosition - transform.position, Color.red); 
+		Debug.Log (gameObject.name + " " + navMeshAgent.remainingDistance + " " + index + " " + following);
+		Debug.DrawRay (transform.position, navMeshAgent.destination - transform.position, Color.red); 
 	}
 	void goTo(Transform pos){
 		float step = 2f * Time.deltaTime;
