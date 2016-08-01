@@ -128,12 +128,12 @@ public class chariotMovement : MonoBehaviour {
 		}
 		if (Input.GetKey (KeyCode.E)) {
 			print ("spear key pressed");
-			GameObject spear = GameObject.FindWithTag ("spear");
-			spear.GetComponent<spearScript> ().throwSpear ();
+			//GameObject spear = GameObject.FindWithTag ("spear");
+			//spear.GetComponent<spearScript> ().throwSpear ();
 
 		}
 
-		transform.position = new Vector3 (transform.position.x, 0.6f, transform.position.z);
+		transform.position = new Vector3 (transform.position.x, 0.8f, transform.position.z);
 
 	}
 	void OnTriggerExit(Collider col){
