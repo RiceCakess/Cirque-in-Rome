@@ -103,6 +103,8 @@ public class chariotMovement : MonoBehaviour {
 			health.GetComponent<healthBar> ().hitStamina ();
 			print ("hit");
 			stamina--;
+			soundManager.instance.playfx (transform, soundManager.instance.whip);
+			soundManager.instance.playfx (transform, soundManager.instance.neigh);
 			rb.AddRelativeForce (Vector3.forward * thrust * 50, ForceMode.Acceleration);
 		}
 		//Debug.Log (Input.GetAxis ("Mouse ScrollWheel"));

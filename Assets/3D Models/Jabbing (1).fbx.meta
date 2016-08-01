@@ -238,6 +238,7 @@ ModelImporter:
     4300032: polySurface17
     4300034: polySurface18
     7400000: Take 001
+    7400002: Idle
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -271,6 +272,212 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: back
+        weight: 1
+      - path: group
+        weight: 1
+      - path: group/pasted__pSphere1
+        weight: 1
+      - path: group/pasted__pSphere1/transform17
+        weight: 1
+      - path: group1
+        weight: 1
+      - path: group2
+        weight: 1
+      - path: group3
+        weight: 1
+      - path: group4
+        weight: 1
+      - path: group4/pasted__pCylinder2
+        weight: 1
+      - path: group4/pasted__pCylinder2/transform15
+        weight: 1
+      - path: group5
+        weight: 1
+      - path: group6
+        weight: 1
+      - path: group7
+        weight: 1
+      - path: group7/pasted__pCylinder3
+        weight: 1
+      - path: group7/pasted__pCylinder3/transform13
+        weight: 1
+      - path: group8
+        weight: 1
+      - path: group8/pasted__group6
+        weight: 1
+      - path: group9
+        weight: 1
+      - path: group9/pasted__group6 1
+        weight: 1
+      - path: group9/pasted__group7
+        weight: 1
+      - path: group9/pasted__group7/pasted__pasted__pCylinder3
+        weight: 1
+      - path: group9/pasted__group7/pasted__pasted__pCylinder3/transform11
+        weight: 1
+      - path: group9/pasted__group8
+        weight: 1
+      - path: group9/pasted__group8/pasted__pasted__group6
+        weight: 1
+      - path: group9/pasted__pCylinder3 1
+        weight: 1
+      - path: group9/pasted__pCylinder3 1/transform12
+        weight: 1
+      - path: group10
+        weight: 1
+      - path: group10/pasted__pCube1
+        weight: 1
+      - path: group10/pasted__pCube1/transform10
+        weight: 1
+      - path: group11
+        weight: 1
+      - path: group11/pasted__pCube1 1
+        weight: 1
+      - path: group11/pasted__pCube1 1/transform7
+        weight: 1
+      - path: group12
+        weight: 1
+      - path: group12/pasted__pCube1 2
+        weight: 1
+      - path: group12/pasted__pCube1 2/transform6
+        weight: 1
+      - path: group13
+        weight: 1
+      - path: group13/pasted__group12
+        weight: 1
+      - path: group13/pasted__group12/pasted__pasted__pCube1
+        weight: 1
+      - path: group13/pasted__group12/pasted__pasted__pCube1/transform5
+        weight: 1
+      - path: group14
+        weight: 1
+      - path: group14/pasted__group12 1
+        weight: 1
+      - path: group14/pasted__group12 1/pasted__pasted__pCube1 1
+        weight: 1
+      - path: group14/pasted__group12 1/pasted__pasted__pCube1 1/transform4
+        weight: 1
+      - path: group15
+        weight: 1
+      - path: group15/pasted__group12 2
+        weight: 1
+      - path: group15/pasted__group12 2/pasted__pasted__pCube1 2
+        weight: 1
+      - path: group15/pasted__group12 2/pasted__pasted__pCube1 2/transform3
+        weight: 1
+      - path: group16
+        weight: 1
+      - path: group17
+        weight: 1
+      - path: group18
+        weight: 1
+      - path: group19
+        weight: 1
+      - path: group20
+        weight: 1
+      - path: group20/pasted__pCube1 3
+        weight: 1
+      - path: group20/pasted__pCube1 3/transform2
+        weight: 1
+      - path: left
+        weight: 1
+      - path: pCone1
+        weight: 1
+      - path: pCone1/transform1
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform8
+        weight: 1
+      - path: pCylinder2
+        weight: 1
+      - path: pCylinder2/transform16
+        weight: 1
+      - path: pCylinder3
+        weight: 1
+      - path: pCylinder3/transform14
+        weight: 1
+      - path: pCylinder4
+        weight: 1
+      - path: pCylinder4/transform9
+        weight: 1
+      - path: pSphere1
+        weight: 1
+      - path: pSphere1/transform18
+        weight: 1
+      - path: pSphere2
+        weight: 1
+      - path: pSphere2/polySurface1
+        weight: 1
+      - path: pSphere2/polySurface2
+        weight: 1
+      - path: pSphere2/polySurface3
+        weight: 1
+      - path: pSphere2/polySurface4
+        weight: 1
+      - path: pSphere2/polySurface5
+        weight: 1
+      - path: pSphere2/polySurface6
+        weight: 1
+      - path: pSphere2/polySurface7
+        weight: 1
+      - path: pSphere2/polySurface8
+        weight: 1
+      - path: pSphere2/polySurface9
+        weight: 1
+      - path: pSphere2/polySurface10
+        weight: 1
+      - path: pSphere2/polySurface11
+        weight: 1
+      - path: pSphere2/polySurface12
+        weight: 1
+      - path: pSphere2/polySurface13
+        weight: 1
+      - path: pSphere2/polySurface14
+        weight: 1
+      - path: pSphere2/polySurface15
+        weight: 1
+      - path: pSphere2/polySurface16
+        weight: 1
+      - path: pSphere2/polySurface17
+        weight: 1
+      - path: pSphere2/polySurface18
+        weight: 1
+      - path: pSphere2/transform19
+        weight: 1
+      - path: side1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0

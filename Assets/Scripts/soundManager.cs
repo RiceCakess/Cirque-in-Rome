@@ -4,12 +4,28 @@ using System.Collections;
 public class soundManager : MonoBehaviour {
 	public static soundManager instance = null;
 	//use 
-
+	public AudioSource gallopSrc;
+	public AudioSource cheerSrc;
 	public AudioSource src1;
+	public AudioSource heartSource;
 	public AudioSource bgm_src;
 	public AudioClip horses;
 	public AudioClip chariotHitsOther;
 	public AudioClip chariotHitsWall;
+	public AudioClip whip;
+	public AudioClip heartbeat;
+	public AudioClip rolling;
+	public AudioClip crash;
+	public AudioClip cheering;
+	public AudioClip booing;
+	public AudioClip chattering;
+	public AudioClip clapping;
+	public AudioClip horseBreathing;
+	public AudioClip neigh;
+	public AudioClip gallop;
+
+
+
 	public AudioClip CaligulaVoice;
 
 
@@ -31,7 +47,9 @@ public class soundManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		playHeart ();
+		playGallop ();
+		cheer ();
 		playBgm (bgm);
 	}
 
@@ -65,5 +83,27 @@ public class soundManager : MonoBehaviour {
 			bgm_src.Play ();
 
 		}
+		if (heartSource.isPlaying == false) {
+			heartSource.Play ();
+		}
+		if (gallopSrc.isPlaying == false) {
+			gallopSrc.Play ();
+		}
+		if (cheerSrc.isPlaying == false) {
+			cheerSrc.Play ();
+		}
+	}
+	public void playHeart(){
+		heartSource.clip = heartbeat;
+		heartSource.Play ();
+	}
+	public void playGallop(){
+		gallopSrc.clip = gallop;
+		gallopSrc.Play ();
+	}
+	public void cheer(){
+		cheerSrc.clip = cheering;
+		cheerSrc.Play ();
+
 	}
 }
