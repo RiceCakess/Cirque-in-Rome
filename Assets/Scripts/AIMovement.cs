@@ -6,7 +6,6 @@ public class AIMovement : MonoBehaviour {
 	AIController control;
 	// Use this for initialization
 	void Start () {
-		Random.seed = System.DateTime.Now.Millisecond + convertToInt(gameObject.name);
 		control = GetComponent<AIController> ();
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
 		setDestination(GameObject.Find ("waypoint1").transform);
@@ -68,14 +67,5 @@ public class AIMovement : MonoBehaviour {
 		float subz = (d2.z - d2.z);
 		float hyp = Mathf.Sqrt (subx * subx + subz * subz);
 		return hyp;
-	}
-	int convertToInt(string name){
-		if (name == "otherOne")
-			return 1;
-		else if (name == "otherTwo")
-			return 2;
-		else if (name == "otherthree")
-			return 3;
-		return 0;
 	}
 }

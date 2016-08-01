@@ -12,24 +12,28 @@ public class reticleMovement : MonoBehaviour {
 		img = GetComponent<Image> ();
 		//reticle = img.sprite;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (controller == true) {
-			img.rectTransform.anchoredPosition += speed * (Input.GetAxis ("Horizontal") * Vector2.right + Input.GetAxis ("Vertical") * Vector2.up);
-			if (img.transform.position.x > 1280) {
-				img.transform.position = new Vector2 (1280, transform.position.y);
-			} else if (img.transform.position.x < 0) {
-				img.transform.position = new Vector2 (0, transform.position.y);
-			}
+		Debug.Log (Input.GetAxis ("p2 Horizontal") + " " + Input.GetAxis ("p2 Vertical"));
+		if (controller == true && (Mathf.Abs(Input.GetAxis ("p2 Horizontal")) >= 1 || Mathf.Abs(Input.GetAxis ("p2 Vertical")) >= 1 )) {
 
-			if (img.transform.position.y > 1024) {
-				img.transform.position = new Vector2 (transform.position.x, 1024);
-			} else if (img.transform.position.y < 0) {
-				img.transform.position = new Vector2 (transform.position.x, 0);
+			Vector3 desiredPosX = img.rectTransform.anchoredPosition + new Vector2(speed * Input.GetAxis ("p2 Horizontal") * -1, 0);
+			Vector3 desiredPosY = img.rectTransform.anchoredPosition + new Vector2(0, Input.GetAxis ("p2 Vertical") * speed);
+			if(gameObject.name == "ReticleRight"){
+				if (desiredPosX.x < 620 && desiredPosX.x > 245) {
+					img.rectTransform.anchoredPosition += new Vector2 (speed * Input.GetAxis ("p2 Horizontal") * -1, 0); 
+				}
 			}
-
-				//* Time.deltaTime * speed;
+			else{
+				if (desiredPosX.x > -600 && desiredPosX.x < -255) {
+					img.rectTransform.anchoredPosition += new Vector2 (speed * Input.GetAxis ("p2 Horizontal") * -1, 0); 
+				}
+			}
+			if (desiredPosY.y < 280 && desiredPosY.y > 37) {
+				img.rectTransform.anchoredPosition += new Vector2(0, Input.GetAxis ("p2 Vertical") * speed); 
+			}
+			//* Time.deltaTime * speed;
 		} else {
 			print ("controller not used");
 		}
