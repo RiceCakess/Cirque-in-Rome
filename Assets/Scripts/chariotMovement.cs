@@ -9,7 +9,7 @@ public class chariotMovement : MonoBehaviour {
 	public float health = 20;
 	float speed = 10f;
 	float currentSpeed = 0;
-	float maxSpeed = 10f;
+	float maxSpeed = 13.5f;
 	bool invincible = false;
 	public FloorController flc;
 	public bool canMove = false;
@@ -20,6 +20,7 @@ public class chariotMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		StartCoroutine (rotateWheels ());
 		StartCoroutine (rotateCam ());
+		StartCoroutine (regenStamina ());
 		flc.enable ();
 		StartCoroutine (rideEffect ());
 		soundManager.instance.playBgm (soundManager.instance.bgm);
@@ -55,6 +56,17 @@ public class chariotMovement : MonoBehaviour {
 		/* Write code for riding motion 
 		StartCoroutine (rideEffect());*/
 		return null;
+	}
+	IEnumerator regenStamina(){
+		yield return new WaitForSeconds (5f);
+		if (stamina < 50) {
+			stamina++;
+			GameObject bar = GameObject.FindWithTag ("stamina");
+			Image health = bar.GetComponent<Image> ();
+			health.GetComponent<healthBar> ().updateStamina (stamina);
+		}
+			
+		StartCoroutine (regenStamina());
 	}
 	IEnumerator rotateCam(){
 		float speed = currentSpeed;
@@ -113,7 +125,7 @@ public class chariotMovement : MonoBehaviour {
 		if ((Input.GetMouseButtonUp (0) || Input.GetKeyDown("joystick 1 button 0")) && stamina >= 0) {
 			GameObject bar = GameObject.FindWithTag ("stamina");
 			Image health = bar.GetComponent<Image> ();
-			health.GetComponent<healthBar> ().hitStamina ();
+			health.GetComponent<healthBar> ().updateStamina (stamina);
 			print ("hit");
 			stamina--;
 			soundManager.instance.playfx (transform, soundManager.instance.whip);
