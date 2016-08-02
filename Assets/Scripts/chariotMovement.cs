@@ -15,19 +15,25 @@ public class chariotMovement : MonoBehaviour {
 	public bool canMove = false;
 	Rigidbody rb;
 	Vector3 dirVector = new Vector3(0,0,0);
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
+		flc.enable ();
+		StartCoroutine (startAfterDelay ());
+	}
+
+	IEnumerator startAfterDelay(){
+		yield return new WaitForEndOfFrame ();
 		StartCoroutine (rotateWheels ());
 		StartCoroutine (rotateCam ());
 		StartCoroutine (regenStamina ());
-		flc.enable ();
 		StartCoroutine (rideEffect ());
-		soundManager.instance.playBgm (soundManager.instance.bgm);
 		soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
-
-
+		soundManager.instance.playBgm (soundManager.instance.bgm);
 	}
+
+
 	IEnumerator rotateWheels(){
 		GetComponent<Animation> ().Play ("rotate");
 		yield return new WaitForSeconds (GetComponent<Animation> ()["rotate"].length);
@@ -53,9 +59,20 @@ public class chariotMovement : MonoBehaviour {
 	}
 	float raiseValue;
 	IEnumerator rideEffect(){
-		/* Write code for riding motion 
-		StartCoroutine (rideEffect());*/
-		return null;
+		if (rb.velocity.magnitude > 2) {
+			float time = (10.0f / rb.velocity.magnitude);
+			flc.moveOne (0, 2.5f);
+			flc.moveOne (1, 2.5f);
+			yield return new WaitForSeconds (time);
+			flc.moveOne (0, 0f);
+			flc.moveOne (1, 0f);
+			yield return new WaitForSeconds (time);
+		} else {
+			yield return new WaitForSeconds (1.0f);
+		}
+			StartCoroutine (rideEffect ());
+		
+	
 	}
 	IEnumerator regenStamina(){
 		yield return new WaitForSeconds (5f);
@@ -101,6 +118,9 @@ public class chariotMovement : MonoBehaviour {
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
+			Vector3 dir = col.transform.position - transform.position;
+
+			RaycastHit rayhit;
 			if (invincible == false) {
 				GameObject healthImage = GameObject.FindWithTag ("health");
 				Image heal = healthImage.GetComponent<Image> ();
@@ -110,10 +130,6 @@ public class chariotMovement : MonoBehaviour {
 			}
 			print ("health is" + health);
 		}
-		//		if (col.gameObject.tag == "circus") {
-		//			currentSpeed /= 2;
-		//
-		//		}
 	}
 	bool controller = true;
 	void checkInput(){

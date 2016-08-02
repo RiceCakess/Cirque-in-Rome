@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class soundManager : MonoBehaviour {
 	public static soundManager instance = null;
@@ -62,7 +63,7 @@ public class soundManager : MonoBehaviour {
 		AudioSource src = newEmptySrc.GetComponent<AudioSource>();
 		//getting the audioSource on the new emptySource //empty source is child of soundManager
 		newEmptySrc.transform.parent = transform;
-		//print ("done");
+		print ("done");
 		src.clip = clip;
 		src.Play ();
 	}
