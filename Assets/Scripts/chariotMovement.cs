@@ -76,13 +76,13 @@ public class chariotMovement : MonoBehaviour {
 	}
 	IEnumerator regenStamina(){
 		yield return new WaitForSeconds (5f);
-		if (stamina < 50) {
-			stamina++;
+		if (stamina < 50f) {
+			stamina += 1;
 			GameObject bar = GameObject.FindWithTag ("stamina");
 			Image health = bar.GetComponent<Image> ();
-			health.GetComponent<healthBar> ().updateStamina (stamina);
+			bar.GetComponent<healthBar> ().updateStamina (stamina);
 		}
-			
+		Debug.Log ("stamina is updating");
 		StartCoroutine (regenStamina());
 	}
 	IEnumerator rotateCam(){
