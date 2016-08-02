@@ -9,7 +9,7 @@ public class chariotMovement : MonoBehaviour {
 	public float health = 20;
 	float speed = 10f;
 	float currentSpeed = 0;
-	float maxSpeed = 13.5f;
+	float maxSpeed = 14f;
 	bool invincible = false;
 	public FloorController flc;
 	public bool canMove = false;
@@ -22,13 +22,15 @@ public class chariotMovement : MonoBehaviour {
 		flc.enable ();
 		StartCoroutine (startAfterDelay ());
 	}
-
+	//1,3
+	//0,2
 	IEnumerator startAfterDelay(){
 		yield return new WaitForEndOfFrame ();
 		StartCoroutine (rotateWheels ());
 		StartCoroutine (rotateCam ());
 		StartCoroutine (regenStamina ());
 		StartCoroutine (rideEffect ());
+		StartCoroutine (startPause ());
 		soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
 		soundManager.instance.playBgm (soundManager.instance.bgm);
 	}
@@ -63,16 +65,39 @@ public class chariotMovement : MonoBehaviour {
 			float time = (10.0f / rb.velocity.magnitude);
 			flc.moveOne (0, 2.5f);
 			flc.moveOne (1, 2.5f);
+			flc.moveOne (2, 0f);
+			flc.moveOne (3, 0f);
 			yield return new WaitForSeconds (time);
 			flc.moveOne (0, 0f);
 			flc.moveOne (1, 0f);
+			flc.moveOne (2, 2.5f);
+			flc.moveOne (3, 2.5f);
 			yield return new WaitForSeconds (time);
 		} else {
 			yield return new WaitForSeconds (1.0f);
 		}
 			StartCoroutine (rideEffect ());
-		
-	
+	}
+	IEnumerator floorRight(){
+		flc.moveOne (1, 4.5f);
+		flc.moveOne (3, 4.5f);
+		yield return new WaitForSeconds (3.0f);
+		flc.moveOne (1, 0f);
+		flc.moveOne (3, 0f);
+	}
+	IEnumerator floorLeft(){
+		flc.moveOne (0, 4.5f);
+		flc.moveOne (2, 4.5f);
+		yield return new WaitForSeconds (3.0f);
+		flc.moveOne (0, 0f);
+		flc.moveOne (2, 0f);
+	}
+	IEnumerator floorFront(){
+		flc.moveOne (2, 4.5f);
+		flc.moveOne (3, 4.5f);
+		yield return new WaitForSeconds (3.0f);
+		flc.moveOne (2, 0f);
+		flc.moveOne (3, 0f);
 	}
 	IEnumerator regenStamina(){
 		yield return new WaitForSeconds (5f);
@@ -102,7 +127,7 @@ public class chariotMovement : MonoBehaviour {
 		StartCoroutine (rotateCam ());
 	}
 	IEnumerator startPause(){
-		yield return new WaitForSeconds (25f);
+		yield return new WaitForSeconds (18f);
 		GameObject.Find ("skipText").GetComponent<Text>().text = "";
 		canMove = true;
 	}
@@ -120,15 +145,24 @@ public class chariotMovement : MonoBehaviour {
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
 			Vector3 dir = col.transform.position - transform.position;
 
-			RaycastHit rayhit;
 			if (invincible == false) {
 				GameObject healthImage = GameObject.FindWithTag ("health");
 				Image heal = healthImage.GetComponent<Image> ();
 				heal.GetComponent<healthBar> ().hit ();
 				health -= 1;
 				StartCoroutine (invincibility ());
+
+				var relativePoint = transform.InverseTransformPoint(col.transform.position);
+				if (relativePoint.x < 0.0) {
+					StartCoroutine (floorLeft ());
+				} else if (relativePoint.x > 0.0) {
+					StartCoroutine (floorRight ());
+				} else {
+					StartCoroutine (floorFront ());
+				}
+					
+				Debug.Log (relativePoint);
 			}
-			print ("health is" + health);
 		}
 	}
 	bool controller = true;
@@ -142,7 +176,6 @@ public class chariotMovement : MonoBehaviour {
 			GameObject bar = GameObject.FindWithTag ("stamina");
 			Image health = bar.GetComponent<Image> ();
 			health.GetComponent<healthBar> ().updateStamina (stamina);
-			print ("hit");
 			stamina--;
 			soundManager.instance.playfx (transform, soundManager.instance.whip);
 			soundManager.instance.playfx (transform, soundManager.instance.neigh);

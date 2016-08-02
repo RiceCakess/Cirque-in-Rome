@@ -52,26 +52,34 @@ public class soundManager : MonoBehaviour {
 		playGallop ();
 		cheer ();
 		playBgm (bgm);
+
+		bgm_src.volume *= .5f;
+		gallopSrc.volume *= .5f;
+		cheerSrc.volume *= .5f;
+		src1.volume *= .5f;
+		heartSource.volume *= .3f;
+		bgm_src.volume *= .5f;
 	}
 
 	public void playfx(Transform target_object, AudioClip clip){
 		//create an emptysource prefab
 		//put it where the sound comes from 
 		//let the audio source of this prefab play the audio clip
-		GameObject newEmptySrc =  Instantiate(emptySource);
+		GameObject newEmptySrc = Instantiate (emptySource);
 		newEmptySrc.transform.position = target_object.position;
-		AudioSource src = newEmptySrc.GetComponent<AudioSource>();
+		AudioSource src = newEmptySrc.GetComponent<AudioSource> ();
 		//getting the audioSource on the new emptySource //empty source is child of soundManager
 		newEmptySrc.transform.parent = transform;
-		print ("done");
 		src.clip = clip;
 		src.Play ();
+		if (clip != CaligulaVoice) {
+			src.volume *= .5f;
+		}
+	
 	}
 	public void playBgm(AudioClip clip){
 		bgm_src.clip = clip;
 		bgm_src.Play ();
-
-
 	}
 
 	public void stopBgm(){
