@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4341ff78b4c7a3748bb318cac1171803
-timeCreated: 1470147551
+guid: 17e9a84ce3a2c0d439ad1c753126eb00
+timeCreated: 1470199925
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -225,7 +225,7 @@ ModelImporter:
     7400000: Take 001
     9500000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -248,7 +248,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 15
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -266,7 +266,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 2
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

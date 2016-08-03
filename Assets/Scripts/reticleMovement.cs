@@ -15,6 +15,7 @@ public class reticleMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		
 //		Debug.Log (Input.GetAxis ("p2 Horizontal") + " " + Input.GetAxis ("p2 Vertical"));
 		if (controller == true && (Mathf.Abs(Input.GetAxis ("p2 Horizontal")) >= 1 || Mathf.Abs(Input.GetAxis ("p2 Vertical")) >= 1 )) {
 

@@ -4,12 +4,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class chariotMovement : MonoBehaviour {
 	public float thrust;
-	public float movementSpeed = 10f;
-	public float stamina = 50f;
+	//public float movementSpeed = 10f;
+	float stamina = 50f;
 	public float health = 20;
 	float speed = 10f;
 	float currentSpeed = 0;
-	float maxSpeed = 14f;
+	float maxSpeed = 15f;
 	bool invincible = false;
 	public FloorController flc;
 	public bool canMove = false;
@@ -28,11 +28,11 @@ public class chariotMovement : MonoBehaviour {
 		yield return new WaitForEndOfFrame ();
 		StartCoroutine (rotateWheels ());
 		StartCoroutine (rotateCam ());
-		StartCoroutine (regenStamina ());
 		StartCoroutine (rideEffect ());
 		StartCoroutine (startPause ());
 		soundManager.instance.playfx (transform, soundManager.instance.CaligulaVoice);
 		soundManager.instance.playBgm (soundManager.instance.bgm);
+		StartCoroutine (regenStamina());
 	}
 
 
@@ -59,7 +59,7 @@ public class chariotMovement : MonoBehaviour {
 		}
 
 	}
-	float raiseValue;
+	//float raiseValue;
 	IEnumerator rideEffect(){
 		if (rb.velocity.magnitude > 2) {
 			float time = (10.0f / rb.velocity.magnitude);
@@ -100,14 +100,19 @@ public class chariotMovement : MonoBehaviour {
 		flc.moveOne (3, 0f);
 	}
 	IEnumerator regenStamina(){
-		yield return new WaitForSeconds (5f);
+		print ("stamina coroutine starts");
+		Debug.Log ("stam coroutine starts");
+		yield return new WaitForSeconds (1.0f);
 		if (stamina < 50f) {
-			stamina += 1;
+			Debug.Log ("stamina is updating");
+			print ("stam is updating");
+			stamina += 1f;
 			GameObject bar = GameObject.FindWithTag ("stamina");
 			Image health = bar.GetComponent<Image> ();
-			bar.GetComponent<healthBar> ().updateStamina (stamina);
+			health.GetComponent<healthBar> ().updateStamina (stamina);
 		}
 		Debug.Log ("stamina is updating");
+		print ("stam update");
 		StartCoroutine (regenStamina());
 	}
 	IEnumerator rotateCam(){
@@ -177,6 +182,7 @@ public class chariotMovement : MonoBehaviour {
 			Image health = bar.GetComponent<Image> ();
 			health.GetComponent<healthBar> ().updateStamina (stamina);
 			stamina--;
+			print ("decreased stamina");
 			soundManager.instance.playfx (transform, soundManager.instance.whip);
 			soundManager.instance.playfx (transform, soundManager.instance.neigh);
 			rb.AddRelativeForce (Vector3.forward * thrust * 50, ForceMode.Acceleration);
