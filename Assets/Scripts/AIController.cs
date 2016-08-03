@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class AIController : MonoBehaviour {
 	public float movementSpeed = 8f;
 	float speed = 100.0f;
@@ -8,6 +9,8 @@ public class AIController : MonoBehaviour {
 	public float currentSpeed = 0;
 	float accel = .02f;
 	float deccel = .05f;
+	float health = 5;
+	float lapsCompleted = 0;
 	Vector3 dirVector = new Vector3(0,0,0);
 	List<KeyCode> currentInput = new List<KeyCode>();
 	void Start () {
@@ -18,10 +21,39 @@ public class AIController : MonoBehaviour {
 	void Update () {
 		checkInput ();
 	}
+	bool invincible = false;
 	public void sendInput(KeyCode key){
 		if (!currentInput.Contains (key)) {
 			currentInput.Add (key);
 		}
+	}
+	void OnCollisionEnter(Collision col){
+		if (!invincible && col.gameObject.name == "RollingChariot") {
+			health--;
+			invincibility ();
+			if (health <= 0) {
+				Destroy (this);
+			}
+			print ( gameObject.name + " " + health + " health");
+		}
+
+	}
+	void OnTriggerEnter(Collider col){
+		if (col.gameObject.tag == "tracker") {
+			lapsCompleted++;
+			if (lapsCompleted >= 4) {
+				SceneManager.LoadScene (4);
+			}
+			print ( gameObject.name + " " + lapsCompleted + " laps");
+		}
+	}
+	IEnumerator invincibility(){
+		//print ("invincible");
+		invincible = true;
+		yield return new WaitForSeconds (1.5f);
+		invincible = false;
+		//print ("not invincible");
+
 	}
 	void checkInput(){
 		//transform.Rotate ( rotationVector3 * Time.deltaTime * speed);

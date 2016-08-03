@@ -219,11 +219,7 @@ public class chariotMovement : MonoBehaviour {
 
 	}
 	void OnTriggerExit(Collider col){
-		if (col.gameObject.tag == "tracker") {
-			lapTracker lap = GameObject.FindWithTag ("tracker").GetComponent<lapTracker> ();
-			lap.currentLaps++;
-			print ("you have completed " + lap.currentLaps + " laps");
-		}
+		
 	}
 
 
