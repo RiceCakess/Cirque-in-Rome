@@ -40,10 +40,10 @@ public class AIController : MonoBehaviour {
 	}
 	public void lapCompleted(){
 		lapsCompleted++;
-		if (lapsCompleted >= 4) {
+		if (lapsCompleted >= 5) {
 			SceneManager.LoadScene (4);
 		}
-		print ( gameObject.name + " " + lapsCompleted + " laps");
+		//print ( gameObject.name + " " + lapsCompleted + " laps");
 	}
 	IEnumerator invincibility(){
 		//print ("invincible");

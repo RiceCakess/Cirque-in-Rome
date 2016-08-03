@@ -6,8 +6,8 @@ public class spearScript : MonoBehaviour {
 	public float smooth = 2.0F;
 
 	//private Vector3 position;
-	private Vector3 leftPos = new Vector3(-4.3f, 1.5f, -4.5f);
-	private Vector3 rightPos = new Vector3 (-2.1f, 1.4f, -4.5f);
+	private Vector3 leftPos = new Vector3(-1.1f, 1.12f, .74f);
+	private Vector3 rightPos = new Vector3 (1.05f, .99f, .99f);
 	bool facingLeft = true;
 	bool throwable = true;
 	// Use this for initialization
@@ -16,7 +16,7 @@ public class spearScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		
 		//if the X or B buttons are pressed, switch pos
 		//if the X button is pressed, then switch the spear's side to the left
@@ -53,7 +53,7 @@ public class spearScript : MonoBehaviour {
 		//transform.localRotation = Quaternion.Slerp (transform.localRotation, target, Time.deltaTime * smooth);
 		//if A is pressed, shoot the spear
 
-		//remove third, joystick button 0, if you have 2 controllers 
+		//remove third, joystick button 3, if you have 2 controllers 
 		if (Input.GetKeyDown (KeyCode.K) || Input.GetKeyDown("joystick 2 button 0") || Input.GetKeyDown("joystick 1 button 3") ){
 			if (facingLeft == true) {
 				//makes the spear moveable and use gravity
@@ -62,7 +62,8 @@ public class spearScript : MonoBehaviour {
 				//makes it so there is no parent 
 				transform.parent = null;
 				//adds force diagonally up and left 
-				GetComponent<Rigidbody> ().AddForce ((Vector3.left) * 150 + (Vector3.up) * 250);
+				GetComponent<Rigidbody> ().AddRelativeForce (new Vector3(1,0,0) * 150 + (Vector3.up) * 250);
+				//GetComponent<Rigidbody>().AddTorque(transform.up * 10f * transform.rotation.x);
 				//makes it so the player cannot throw again until the throwreturn corountine is over 
 				throwable = false;
 				//starts coroutine with a delay 
@@ -72,7 +73,7 @@ public class spearScript : MonoBehaviour {
 				GetComponent<Rigidbody> ().isKinematic = false;
 				GetComponent<Rigidbody> ().useGravity = true;
 				transform.parent = null;
-				GetComponent<Rigidbody> ().AddForce ((Vector3.right) * 150 + (Vector3.up) * 250);
+				GetComponent<Rigidbody> ().AddRelativeForce (new Vector3(-1,0,0) * 150 + (Vector3.up) * 250);
 				throwable = false;
 				StartCoroutine (throwReturn (facingLeft));
 			}
@@ -89,7 +90,7 @@ public class spearScript : MonoBehaviour {
 		transform.parent = GameObject.FindWithTag ("chariot").transform;
 		//creates a delay of 1.75 sec 
 		yield return new WaitForSeconds (1.75f);
-		GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
+		//GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
 		//resets so that the spear can be thrown again 
 		throwable = true;
 		GetComponent<Rigidbody> ().velocity = Vector3.zero;
@@ -107,6 +108,6 @@ public class spearScript : MonoBehaviour {
 	IEnumerator charThrows(){
 		GameObject.FindWithTag ("shooter").GetComponent<Animation> ().Play ("Take 001");
 		yield return new WaitForSeconds (GameObject.FindWithTag ("shooter").GetComponent<Animation> () ["Take 001"].length);
-		GameObject.FindWithTag ("shooter").GetComponent<Animation> ().Play ("Idle");
+		//GameObject.FindWithTag ("shooter").GetComponent<Animation> ().Play ("Idle");
 	}
 }

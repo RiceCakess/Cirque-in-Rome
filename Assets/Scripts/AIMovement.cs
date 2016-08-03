@@ -10,7 +10,7 @@ public class AIMovement : MonoBehaviour {
 		control = GetComponent<AIController> ();
 		navMeshAgent = this.GetComponent<NavMeshAgent> ();
 		chariotObjects = GameObject.FindGameObjectsWithTag ("otherChariot");
-		player = GameObject.Find ("RollingChariot");
+		player = GameObject.Find ("finalChar");
 	}
 	Transform waypoint;
 	Vector3 setPosition;
@@ -70,7 +70,7 @@ public class AIMovement : MonoBehaviour {
 	}
 	void setDestination(Transform toWaypoint){
 		waypoint = toWaypoint;
-		setPosition = toWaypoint.transform.position + new Vector3 (Random.value*20f, 0, Random.value*10f);
+		setPosition = toWaypoint.transform.position + new Vector3 (Random.value*40f, 0, Random.value*10f);
 		navMeshAgent.SetDestination (setPosition);
 	}
 	float getDistance(Transform d1, Transform d2){

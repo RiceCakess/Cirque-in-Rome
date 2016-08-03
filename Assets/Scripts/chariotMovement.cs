@@ -102,7 +102,7 @@ public class chariotMovement : MonoBehaviour {
 	IEnumerator regenStamina(){
 		print ("stamina coroutine starts");
 		Debug.Log ("stam coroutine starts");
-		yield return new WaitForSeconds (1.0f);
+		yield return new WaitForSeconds (5f);
 		if (stamina < 50f) {
 			Debug.Log ("stamina is updating");
 			print ("stam is updating");
@@ -142,11 +142,14 @@ public class chariotMovement : MonoBehaviour {
 		yield return new WaitForSeconds (1.5f);
 		invincible = false;
 		print ("not invincible");
-
 	}
-
+	IEnumerator shakeFloor(){
+		flc.moveAll (4f);
+		yield return new WaitForSeconds (1f);
+		flc.moveAll (0f);
+	}
 	void OnCollisionEnter(Collision col){
-		if (col.gameObject.tag == "otherChariot" || col.gameObject.tag == "circus" || col.gameObject.tag == "median") {
+		if (col.gameObject.tag == "otherChariot") {
 			soundManager.instance.playfx (transform, soundManager.instance.chariotHitsWall);
 			Vector3 dir = col.transform.position - transform.position;
 
@@ -166,8 +169,13 @@ public class chariotMovement : MonoBehaviour {
 					StartCoroutine (floorFront ());
 				}
 					
-				Debug.Log (relativePoint);
+				//Debug.Log (relativePoint);
 			}
+		}
+		if ((col.gameObject.tag == "circus" || col.gameObject.tag == "median") && !invincible) {
+			shakeFloor ();
+			invincibility ();
+			Debug.Log ("hit circus");
 		}
 	}
 	bool controller = true;
@@ -182,7 +190,7 @@ public class chariotMovement : MonoBehaviour {
 			Image health = bar.GetComponent<Image> ();
 			health.GetComponent<healthBar> ().updateStamina (stamina);
 			stamina--;
-			print ("decreased stamina");
+			//print ("decreased stamina");
 			soundManager.instance.playfx (transform, soundManager.instance.whip);
 			soundManager.instance.playfx (transform, soundManager.instance.neigh);
 			rb.AddRelativeForce (Vector3.forward * thrust * 50, ForceMode.Acceleration);
