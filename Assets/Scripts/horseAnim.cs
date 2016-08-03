@@ -13,8 +13,12 @@ public class horseAnim : MonoBehaviour {
 	
 	}
 	IEnumerator playHorse(){
-		GetComponent<Animation> ().Play ("Take 001");
-		yield return new WaitForSeconds (GetComponent<Animation> () ["Take 001"].length);
+		GetComponent<Animation> ().Play ("horse");
+		transform.localPosition = Vector3.Slerp (transform.localPosition, new Vector3 (transform.localPosition.x, transform.localPosition.y + .1f, transform.localPosition.z), GetComponent<Animation> () ["horse"].length / 2);
+		yield return new WaitForSeconds (GetComponent<Animation> () ["horse"].length / 2f);
+		transform.localPosition = Vector3.Slerp (transform.localPosition, new Vector3 (transform.localPosition.x, transform.localPosition.y - .1f, transform.localPosition.z), GetComponent<Animation> () ["horse"].length / 2);
+		yield return new WaitForSeconds (GetComponent<Animation> () ["horse"].length / 2f);
+
 		StartCoroutine (playHorse ());
 
 	}

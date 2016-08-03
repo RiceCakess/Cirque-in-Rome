@@ -40,11 +40,11 @@ public class spearScript : MonoBehaviour {
 		//third is up-down
 		//first is right-left
 		//adds torque, does not move spear itself but changes the effect when it is thrown - CHANGE WHEN HAVE 2 CONTROLLERS TO JUST ROTATION
-		if (Input.GetAxis ("p1 Camera") >= 1) {
-			GetComponent<Rigidbody> ().AddTorque (new Vector3 (0, 1, 0) * 10, ForceMode.VelocityChange);
-			//transform.Rotate (Input.GetAxis ("p1 Camera"), 0, Input.GetAxis ("p1 Camera"));
-		} else if (Input.GetAxis ("p1 Camera") < 1) {
-			GetComponent<Rigidbody> ().AddTorque (new Vector3 (0, -1, 0) * 10, ForceMode.VelocityChange);
+		if (Input.GetAxis ("p2 Horizontal") >= 1) {
+			transform.Rotate(new Vector3(0, 0, Input.GetAxis("p2 Horizontal")));
+		}
+		if (Input.GetAxis ("p2 Vertical") >= 1) {
+			transform.Rotate(new Vector3(Input.GetAxis("p2 Vertical"), 0, 0));
 		}
 
 		//float vert = Input.GetAxis ("p2 Vertical") * -1;

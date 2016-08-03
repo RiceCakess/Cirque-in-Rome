@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 762e5d33e78530f4fa5d1e40b1653f99
-timeCreated: 1469997371
+guid: ee546bc8367409148b84906b37fbb27c
+timeCreated: 1470233336
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,41 +8,57 @@ ModelImporter:
     100000: back
     100002: bottom
     100004: group
-    100006: //RootNode
-    100008: left
-    100010: pCube1
-    100012: pCube2
-    100014: pCube3
-    100016: pCube4
-    100018: pCube5
-    100020: pCube6
-    100022: polySurface1
+    100006: group1
+    100008: group2
+    100010: //RootNode
+    100012: left
+    100014: pCube1
+    100016: pCube2
+    100018: pCube3
+    100020: pCube4
+    100022: pCube5
+    100024: pCube6
+    100026: pCube7
+    100028: pCube8
+    100030: pCube9
+    100032: polySurface1
     400000: back
     400002: bottom
     400004: group
-    400006: //RootNode
-    400008: left
-    400010: pCube1
-    400012: pCube2
-    400014: pCube3
-    400016: pCube4
-    400018: pCube5
-    400020: pCube6
-    400022: polySurface1
+    400006: group1
+    400008: group2
+    400010: //RootNode
+    400012: left
+    400014: pCube1
+    400016: pCube2
+    400018: pCube3
+    400020: pCube4
+    400022: pCube5
+    400024: pCube6
+    400026: pCube7
+    400028: pCube8
+    400030: pCube9
+    400032: polySurface1
     2300000: pCube1
     2300002: pCube2
     2300004: pCube3
     2300006: pCube4
     2300008: pCube5
     2300010: pCube6
-    2300012: polySurface1
+    2300012: pCube7
+    2300014: pCube8
+    2300016: pCube9
+    2300018: polySurface1
     3300000: pCube1
     3300002: pCube2
     3300004: pCube3
     3300006: pCube4
     3300008: pCube5
     3300010: pCube6
-    3300012: polySurface1
+    3300012: pCube7
+    3300014: pCube8
+    3300016: pCube9
+    3300018: polySurface1
     4300000: polySurface1
     4300002: pCube1
     4300004: pCube2
@@ -50,12 +66,15 @@ ModelImporter:
     4300008: pCube4
     4300010: pCube5
     4300012: pCube6
-    7400000: Take 001
+    4300014: pCube7
+    4300016: pCube8
+    4300018: pCube9
+    7400000: horse
     9500000: //RootNode
     11100000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 1
+    materialName: 2
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -75,15 +94,15 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: horse
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 60
+      lastFrame: 36
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
@@ -107,7 +126,17 @@ ModelImporter:
         weight: 1
       - path: group
         weight: 1
+      - path: group1
+        weight: 1
+      - path: group2
+        weight: 1
       - path: left
+        weight: 1
+      - path: pCube7
+        weight: 1
+      - path: pCube8
+        weight: 1
+      - path: pCube9
         weight: 1
       - path: polySurface1
         weight: 1
