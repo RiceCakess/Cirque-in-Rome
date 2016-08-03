@@ -38,14 +38,12 @@ public class AIController : MonoBehaviour {
 		}
 
 	}
-	void OnTriggerEnter(Collider col){
-		if (col.gameObject.tag == "tracker") {
-			lapsCompleted++;
-			if (lapsCompleted >= 4) {
-				SceneManager.LoadScene (4);
-			}
-			print ( gameObject.name + " " + lapsCompleted + " laps");
+	public void lapCompleted(){
+		lapsCompleted++;
+		if (lapsCompleted >= 4) {
+			SceneManager.LoadScene (4);
 		}
+		print ( gameObject.name + " " + lapsCompleted + " laps");
 	}
 	IEnumerator invincibility(){
 		//print ("invincible");
