@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class soundManager : MonoBehaviour {
 	public static soundManager instance = null;
 	//use 
+	public AudioSource clipSrc;
 	public AudioSource gallopSrc;
 	public AudioSource cheerSrc;
 	public AudioSource src1;
@@ -24,6 +25,9 @@ public class soundManager : MonoBehaviour {
 	public AudioClip horseBreathing;
 	public AudioClip neigh;
 	public AudioClip gallop;
+	public AudioClip spearThrow;
+	public AudioClip spearHit;
+	public AudioClip speech;
 
 
 
@@ -52,6 +56,7 @@ public class soundManager : MonoBehaviour {
 		playGallop ();
 		cheer ();
 		playBgm (bgm);
+		playOnce ();
 
 		bgm_src.volume *= .5f;
 		gallopSrc.volume *= .5f;
@@ -113,6 +118,11 @@ public class soundManager : MonoBehaviour {
 	public void cheer(){
 		cheerSrc.clip = cheering;
 		cheerSrc.Play ();
+
+	}
+	public void playOnce(){
+		clipSrc.clip = speech;
+		clipSrc.Play ();
 
 	}
 }

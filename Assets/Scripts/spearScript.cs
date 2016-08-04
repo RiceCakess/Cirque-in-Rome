@@ -54,7 +54,8 @@ public class spearScript : MonoBehaviour {
 		//if A is pressed, shoot the spear
 
 		//remove third, joystick button 3, if you have 2 controllers 
-		if (Input.GetKeyDown (KeyCode.K) || Input.GetKeyDown("joystick 2 button 0") || Input.GetKeyDown("joystick 1 button 3") ){
+		if ((Input.GetKeyDown (KeyCode.K) || Input.GetKeyDown("joystick 2 button 0") ) && throwable == true){
+			soundManager.instance.playfx (transform, soundManager.instance.spearThrow);
 			if (facingLeft == true) {
 				//makes the spear moveable and use gravity
 				GetComponent<Rigidbody> ().isKinematic = false;
@@ -110,4 +111,9 @@ public class spearScript : MonoBehaviour {
 		yield return new WaitForSeconds (GameObject.FindWithTag ("shooter").GetComponent<Animation> () ["Take 001"].length);
 		//GameObject.FindWithTag ("shooter").GetComponent<Animation> ().Play ("Idle");
 	}
+
+	void OnCollisionEnter(Collision col){
+		soundManager.instance.playfx (transform, soundManager.instance.spearHit);
+	}
+
 }
