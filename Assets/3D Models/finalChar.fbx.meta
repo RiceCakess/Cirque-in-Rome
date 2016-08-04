@@ -230,7 +230,7 @@ ModelImporter:
       name: rotate
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 85
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
