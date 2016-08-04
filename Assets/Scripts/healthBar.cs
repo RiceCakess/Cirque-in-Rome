@@ -24,7 +24,7 @@ public class healthBar : MonoBehaviour {
 		bar.fillAmount = stamina/50f;
 	}
 	public void hit(){
-		bar.fillAmount -=  1/50f;
+		bar.fillAmount -=  1/15f;
 		StartCoroutine (flashRed ());
 		updateTint ();
 	}

@@ -6,7 +6,7 @@ public class chariotMovement : MonoBehaviour {
 	public float thrust;
 	//public float movementSpeed = 10f;
 	float stamina = 50f;
-	public float health = 20;
+	public float health = 15;
 	float speed = 10f;
 	float currentSpeed = 0;
 	float maxSpeed = 15f;
