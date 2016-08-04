@@ -22,22 +22,6 @@ public class AIMovement : MonoBehaviour {
 	bool hasSpear = true;
 	// Update is called once per frame
 	void Update () {
-		foreach (Transform child in transform) {
-			if (child.tag == "spear") {
-				Rigidbody rbc = child.GetComponent<Rigidbody> ();
-				Vector3 target = transform.position - child.transform.position;
-				Debug.DrawRay (child.transform.forward, transform.position - child.transform.position, Color.red);
-				Vector3 look = Vector3.RotateTowards (child.transform.forward, target, 10f, 0.0F);
-				look.z += 90f;
-				child.transform.rotation = Quaternion.LookRotation(look);
-				rbc.isKinematic = false;
-				rbc.useGravity = true;
-
-				rbc.transform.parent = null;
-
-				//rbc.AddRelativeForce (new Vector3(1,0,0) * 150 + (Vector3.up) * 250);
-			}
-		}
 		if (canMove != player.GetComponent<chariotMovement> ().canMove) {
 			setDestination(GameObject.Find ("waypoint1").transform);
 			canMove = true;
