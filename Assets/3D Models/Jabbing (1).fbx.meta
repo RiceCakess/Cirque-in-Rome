@@ -237,7 +237,7 @@ ModelImporter:
     4300030: polySurface16
     4300032: polySurface17
     4300034: polySurface18
-    7400000: Take 001
+    7400000: jab
     7400002: Idle
     9500000: //RootNode
     11100000: //RootNode
@@ -263,7 +263,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: jab
       takeName: Take 001
       firstFrame: 1
       lastFrame: 32
