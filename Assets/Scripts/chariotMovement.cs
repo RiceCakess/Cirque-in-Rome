@@ -175,7 +175,7 @@ public class chariotMovement : MonoBehaviour {
 		if ((col.gameObject.tag == "circus" || col.gameObject.tag == "median") && !invincible) {
 			shakeFloor ();
 			invincibility ();
-			Debug.Log ("hit circus");
+			//Debug.Log ("hit circus");
 		}
 	}
 	bool controller = true;

@@ -31,7 +31,10 @@ public class healthBar : MonoBehaviour {
 
 	private void updateTint(){
 		Color c = bloodTint.color;
-		c.a = 1f - bar.fillAmount;
+		float alpha = 1f - (bar.fillAmount * .85f);
+		if (alpha <= 1f) {
+			c.a = alpha;
+		}
 		bloodTint.color = c;
 	}
 	IEnumerator flashRed(){
