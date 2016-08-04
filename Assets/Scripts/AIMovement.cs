@@ -53,7 +53,6 @@ public class AIMovement : MonoBehaviour {
 				}
 			}
 		}
-		throwSpear ();
 		/*if ((transform.position - player.transform.position).magnitude > 0 && (transform.position - player.transform.position).magnitude <= 20f && following) {
 			navMeshAgent.SetDestination (player.transform.position);
 			if (Random.value > .8f) {
