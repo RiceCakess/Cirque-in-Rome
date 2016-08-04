@@ -19,8 +19,25 @@ public class AIMovement : MonoBehaviour {
 	int index = 1;
 	int maxIndex = 7;
 	bool following = false;
+	bool hasSpear = true;
 	// Update is called once per frame
 	void Update () {
+		foreach (Transform child in transform) {
+			if (child.tag == "spear") {
+				Rigidbody rbc = child.GetComponent<Rigidbody> ();
+				Vector3 target = transform.position - child.transform.position;
+				Debug.DrawRay (child.transform.forward, transform.position - child.transform.position, Color.red);
+				Vector3 look = Vector3.RotateTowards (child.transform.forward, target, 10f, 0.0F);
+				look.z += 90f;
+				child.transform.rotation = Quaternion.LookRotation(look);
+				rbc.isKinematic = false;
+				rbc.useGravity = true;
+
+				rbc.transform.parent = null;
+
+				//rbc.AddRelativeForce (new Vector3(1,0,0) * 150 + (Vector3.up) * 250);
+			}
+		}
 		if (canMove != player.GetComponent<chariotMovement> ().canMove) {
 			setDestination(GameObject.Find ("waypoint1").transform);
 			canMove = true;
@@ -36,9 +53,7 @@ public class AIMovement : MonoBehaviour {
 				}
 			}
 		}
-		if (Random.value > 0.8f) {
-			following = true;
-		}
+		throwSpear ();
 		/*if ((transform.position - player.transform.position).magnitude > 0 && (transform.position - player.transform.position).magnitude <= 20f && following) {
 			navMeshAgent.SetDestination (player.transform.position);
 			if (Random.value > .8f) {
@@ -58,6 +73,26 @@ public class AIMovement : MonoBehaviour {
 		}
 		//Debug.Log (gameObject.name + " " + navMeshAgent.remainingDistance + " " + index + " " + following);
 		//Debug.DrawRay (transform.position, navMeshAgent.destination - transform.position, Color.red); 
+	}
+	void throwSpear(){
+		if (hasSpear) {
+
+			hasSpear = false;
+			foreach (Transform child in transform) {
+				if (child.tag == "spear") {
+					Rigidbody rbc = child.GetComponent<Rigidbody> ();
+					Vector3 target = child.transform.position - transform.position;
+					Vector3 look = Vector3.RotateTowards (child.transform.forward, target, 10f, 0.0F);
+					child.transform.rotation = Quaternion.LookRotation(look);
+					rbc.isKinematic = false;
+					rbc.useGravity = true;
+
+					rbc.transform.parent = null;
+
+					//rbc.AddRelativeForce (new Vector3(1,0,0) * 150 + (Vector3.up) * 250);
+				}
+			}
+		}
 	}
 	void goTo(Transform pos){
 		float step = 2f * Time.deltaTime;
